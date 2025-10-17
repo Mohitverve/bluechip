@@ -1,0 +1,174 @@
+:root{
+  --blue-600:#9f0b0b;
+  --blue-700:#b03d17;
+  --red-500:#e53935;   /* tiny accents only */
+  --ink:#111827;
+  --muted:#6b7280;
+  --bg:#ffffff;
+  --panel:#ffffff;
+  --border:#eaeef3;
+  --shadow:0 12px 40px rgba(17,24,39,.08);
+  --fast:160ms;
+  --easing:cubic-bezier(.22,.61,.36,1);
+}
+
+/* optional global font if not set elsewhere */
+body { font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+
+
+.hero{
+  background: linear-gradient(180deg, #fff 0%, #f7f9ff 100%);
+  padding: 48px 16px 64px;
+}
+.hero__inner{
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 32px;
+  align-items: center;
+}
+
+/* LEFT */
+.hero__logo{
+  height: 85px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 0 transparent);
+  transition: transform var(--fast) var(--easing), filter var(--fast) var(--easing);
+}
+.hero__logo:hover{
+  transform: translateY(-1px);
+  filter: drop-shadow(0 6px 14px rgba(31,78,216,.15));
+}
+
+.hero__powered{
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+}
+.hero__powered span{
+  color: var(--blue-700);
+  font-weight: 600;
+}
+
+.hero__title{
+  margin: 18px 0 10px;
+  font-size: clamp(28px, 3.8vw, 44px);
+  line-height: 1.15;
+  color: var(--ink);
+}
+.hero__title-accent{
+  color: var(--red-500);
+  position: relative;
+}
+.hero__title-accent::after{
+  /* subtle red underline accent */
+  content:"";
+  position:absolute;
+  left:.1em; right:.1em; bottom:-6px;
+  height:4px; border-radius:4px;
+  background: linear-gradient(90deg, var(--red-500), rgba(229,57,53,.0));
+}
+
+.hero__subtitle{
+  color:#374151;
+  font-size: 16px;
+  max-width: 52ch;
+  margin: 0 0 18px;
+}
+
+.hero__cta{
+  background: var(--red-500) !important;
+  font-weight: 600;
+  padding: 0 18px !important;
+  border-radius: 999px;
+  transition: transform var(--fast) var(--easing), box-shadow var(--fast) var(--easing);
+}
+.hero__cta:hover{
+  background: var(--blue-700) !important;
+  border-color: var(--blue-700) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(31,78,216,.2);
+}
+
+/* RIGHT: single-step form card */
+.hero__right{ width: 100%; }
+.quote-card{
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 26px 24px;
+  transform: translateZ(0);
+  transition: box-shadow var(--fast) var(--easing), transform var(--fast) var(--easing);
+}
+.quote-card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 16px 48px rgba(17,24,39,.10);
+}
+.quote-card__title{
+  margin: 0 0 16px;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink);
+  border-left: 4px solid var(--red-500); /* tiny red accent */
+  padding-left: 10px;
+}
+
+/* Form */
+.quote-form .ant-form-item-label > label{
+  font-weight: 500;
+}
+.quote-form .ant-input,
+.quote-form .ant-input-affix-wrapper,
+.quote-form .ant-select-selector,
+.quote-form textarea{
+  border-radius: 10px !important;
+  transition: box-shadow var(--fast) var(--easing), border-color var(--fast) var(--easing);
+}
+.quote-form .ant-input:focus,
+.quote-form .ant-input-affix-wrapper-focused,
+.quote-form .ant-select-focused .ant-select-selector,
+.quote-form textarea:focus{
+  border-color: var(--blue-600) !important;
+  box-shadow: 0 0 0 3px rgba(31,78,216,.12) !important;
+}
+
+/* Submit */
+.quote-actions{
+  margin-top: 8px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+.btn-primary{
+  background: var(--red-500) !important;
+  font-weight: 600;
+  border-radius: 30px;
+  padding: 0 24px !important;
+  transition: transform var(--fast) var(--easing), box-shadow var(--fast) var(--easing);
+}
+.btn-primary:hover{
+  background: var(--blue-700) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(31,78,216,.2);
+}
+.btn-primary:active{ transform: scale(0.98); }
+
+/* Responsive */
+@media (max-width: 1024px){
+  .hero__inner{ grid-template-columns: 1fr; gap: 24px; }
+  .quote-card{ max-width: 640px; margin-inline: auto; }
+}
+@media (max-width: 480px){
+  .hero{ padding: 36px 14px 56px; }
+  .hero__logo{ height: 30px; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{ transition: none !important; animation: none !important; }
+}
