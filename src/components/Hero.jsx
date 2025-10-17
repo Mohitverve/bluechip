@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Form, Input, Select, message } from "antd";
 import { SendOutlined } from "@ant-design/icons";
-import "./../styles/Hero.css";
+import "./../styles/hero.css";
 import logo from "../assets/cyberpro.png";
 
 const Hero = () => {
