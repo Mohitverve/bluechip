@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { MenuOutlined } from "@ant-design/icons";
 import { Button, Drawer, Menu } from "antd";
-import "./../styles/Navbar.css";
+import "./../styles/navbar.css";
 import logo from "../assets/bluechip.png";
 
 const Navbar = () => {
