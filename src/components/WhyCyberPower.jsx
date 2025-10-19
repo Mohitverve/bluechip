@@ -46,7 +46,9 @@ export default function WhyCyberPower({ videoId = "dQw4w9WgXcQ" }) {
           <div className="wb__frame">
             <iframe
               title="CyberPower Overview"
-              src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1`}
+          src={`https://www.youtube.com/embed/nyRfVWiwiAs?rel=0&modestbranding=1`}
+
+
               loading="lazy"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
