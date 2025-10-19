@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Input, Button, Card, message } from "antd";
 import { ArrowRightOutlined, AppstoreOutlined } from "@ant-design/icons";
-import logo from "../assets/cyberpro.png"; // ✅ Your CyberPower logo
+import logo from "../assets/cyberpro.png";
 import "../styles/hero.css";
 
 export default function CyberpowerHero({ onViewProducts }) {
@@ -13,16 +13,8 @@ export default function CyberpowerHero({ onViewProducts }) {
     form.resetFields();
   };
 
-  const scrollToForm = () => {
-    const el = document.getElementById("partner-form");
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
-  };
-
   return (
     <section className="cp-hero">
-      <div className="cp-blob cp-blob--one" />
-      <div className="cp-blob cp-blob--two" />
-
       <div className="cp-wrap">
         <div className="cp-grid-top">
           {/* LEFT SECTION */}
@@ -39,8 +31,8 @@ export default function CyberpowerHero({ onViewProducts }) {
             </div>
 
             <h1 className="cp-title">
-              <span className="cp-red">Power Protection</span> You Can{" "}
-              <span className="cp-red">Trust</span>
+              <span className="cp-accent">Power Protection</span> You Can{" "}
+              <span className="cp-accent">Trust</span>
             </h1>
 
             <p className="cp-sub">
@@ -56,11 +48,9 @@ export default function CyberpowerHero({ onViewProducts }) {
                 type="primary"
                 size="large"
                 className="cp-btn cp-btn--primary"
-                onClick={scrollToForm}
               >
                 Become a Partner <ArrowRightOutlined />
               </Button>
-
               <Button
                 size="large"
                 className="cp-btn cp-btn--ghost"
@@ -76,14 +66,14 @@ export default function CyberpowerHero({ onViewProducts }) {
             </div>
           </div>
 
-          {/* RIGHT SECTION - Glass Form */}
+          {/* RIGHT SECTION - GLASS FORM */}
           <div className="cp-right">
             <Card id="partner-form" className="cp-card glass-form" bordered={false}>
               <div className="cp-card-head">
                 <h3 className="cp-card-title">Become a Partner</h3>
                 <p className="cp-card-sub">
-                Register your interest to become an authorised reseller or MSP partner for CyberPower power solutions.
-
+                  Register your interest to become an authorised reseller or MSP
+                  partner for CyberPower solutions.
                 </p>
               </div>
 
@@ -92,13 +82,14 @@ export default function CyberpowerHero({ onViewProducts }) {
                 layout="vertical"
                 onFinish={onFinish}
                 requiredMark={false}
+                className="cp-form"
               >
                 <Form.Item
                   name="fullname"
                   label="Full Name"
                   rules={[{ required: true, message: "Please enter your full name" }]}
                 >
-                  <Input placeholder="Your full name" size="large" />
+                  <Input placeholder="Your full name" size="middle" />
                 </Form.Item>
 
                 <Form.Item
@@ -109,7 +100,7 @@ export default function CyberpowerHero({ onViewProducts }) {
                     { type: "email", message: "Please enter a valid email" },
                   ]}
                 >
-                  <Input placeholder="you@company.com" size="large" />
+                  <Input placeholder="you@company.com" size="middle" />
                 </Form.Item>
 
                 <Form.Item
@@ -117,21 +108,21 @@ export default function CyberpowerHero({ onViewProducts }) {
                   label="Company Name"
                   rules={[{ required: true, message: "Please enter your company name" }]}
                 >
-                  <Input placeholder="e.g., Cyber Systems Pty Ltd" size="large" />
+                  <Input placeholder="e.g., Cyber Systems Pty Ltd" size="middle" />
                 </Form.Item>
 
                 <Form.Item name="phone" label="Phone (optional)">
-                  <Input placeholder="+61 4XX XXX XXX" size="large" />
+                  <Input placeholder="+61 4XX XXX XXX" size="middle" />
                 </Form.Item>
 
                 <Form.Item name="message" label="Message / Enquiry">
                   <Input.TextArea
                     placeholder="Tell us what you're looking for..."
-                    autoSize={{ minRows: 3, maxRows: 6 }}
+                    autoSize={{ minRows: 3, maxRows: 4 }}
                   />
                 </Form.Item>
 
-                <Button htmlType="submit" type="primary" size="large" className="cp-submit">
+                <Button htmlType="submit" type="primary" size="middle" className="cp-submit">
                   Submit Application
                 </Button>
               </Form>
