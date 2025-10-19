@@ -22,13 +22,13 @@ const features = [
   },
   {
     icon: <ThunderboltOutlined />,
-    title: "Fast Local Delivery",
-    desc: "Fortnightly container arrivals keep CyberPower products in stock and ready for fast Australia-wide shipping.",
+    title: "Australia-Wide Fast Local Delivery",
+    desc: "Regular container arrivals ensure CyberPower stock is ready for quick, reliable delivery across Australia..",
   },
   {
     icon: <SafetyCertificateOutlined />,
-    title: "Local Warranty & Advanced Replacement",
-    desc: "Up to 3-year warranty and 2-year advanced replacement on CyberPower UPS lines — fully backed by local support.",
+    title: "Local Warranty & Replacement",
+    desc: "Receive up to 3-year warranty and 2-year advanced replacement, fully supported by our local service team.",
   },
 ];
 
