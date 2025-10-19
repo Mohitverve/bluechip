@@ -1,10 +1,11 @@
-import React from "react";
-import { Card, Row, Col, Button } from "antd";
+import React, { useEffect, useRef } from "react";
+import { Card, Button, Row, Col } from "antd";
 import {
   TrophyOutlined,
   DollarOutlined,
   ThunderboltOutlined,
   SafetyCertificateOutlined,
+  TeamOutlined,
 } from "@ant-design/icons";
 import "../styles/why.css";
 
@@ -32,9 +33,22 @@ const features = [
 ];
 
 export default function WhyChooseUs() {
+  const wrapRef = useRef(null);
+
+  // Reveal on scroll
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => e.target.classList.toggle("is-visible", e.isIntersecting)),
+      { threshold: 0.15 }
+    );
+    wrapRef.current?.querySelectorAll(".whyblue__card").forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
   return (
     <section className="whyblue" id="why-bluechip">
-      <div className="whyblue__container">
+      <div className="whyblue__container" ref={wrapRef}>
         <header className="whyblue__head">
           <h2>
             Why Choose <span className="brand">Bluechip</span> as Your CyberPower Distributor
@@ -45,14 +59,19 @@ export default function WhyChooseUs() {
           </p>
         </header>
 
-        <Row gutter={[20, 20]} className="whyblue__grid">
+        <Row gutter={[24, 24]} className="whyblue__grid">
           {features.map((f, i) => (
-            <Col xs={24} md={12} key={i}>
-              <Card className="whyblue__card" bordered={false}>
+            <Col xs={24} sm={12} lg={6} key={i}>
+              <Card className="whyblue__card" bordered={false} style={{ animationDelay: `${i * 70}ms` }}>
                 <div className="whyblue__icon">{f.icon}</div>
-                <div className="whyblue__content">
-                  <h3>{f.title}</h3>
-                  <p>{f.desc}</p>
+                <h3 className="whyblue__title">{f.title}</h3>
+                <p className="whyblue__desc">{f.desc}</p>
+
+                {/* subtle divider + bottom affordance */}
+                <div className="whyblue__foot">
+                  <span className="whyblue__dot" />
+                  <span className="whyblue__dot" />
+                  <span className="whyblue__dot" />
                 </div>
               </Card>
             </Col>
@@ -60,12 +79,7 @@ export default function WhyChooseUs() {
         </Row>
 
         <div className="whyblue__cta">
-          <Button type="primary" shape="round" size="large" className="btn-red">
-            Partner with Bluechip
-          </Button>
-          <Button type="text" className="link-muted">
-            View CyberPower Product Lines
-          </Button>
+         
         </div>
       </div>
     </section>
