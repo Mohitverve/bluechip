@@ -1,135 +1,106 @@
-:root{
-  --blue-600:#1f4ed8;     /* primary */
-  --blue-700:#173fb0;     /* hover/darker */
-  --blue-50:#f5f7ff;
-  --red:#aa403e;   /* tiny accents only */
-  --ink:#1f2937;          /* text */
-  --muted:#6b7280;        /* secondary text */
-  --border:#eaeef3;
-  --shadow:0 6px 24px rgba(17,24,39,.06);
-  --fast:160ms;
-  --easing:cubic-bezier(.22,.61,.36,1);
-}
-
-/* Base container */
-.navbar{
+.cpnav {
   position: sticky;
   top: 0;
   z-index: 1000;
   background: #fff;
-  border-bottom: 1px solid var(--border);
-  transition: box-shadow var(--fast) var(--easing), border-color var(--fast) var(--easing);
+  border-bottom: 1px solid #eaeef3;
+  transition: box-shadow 160ms cubic-bezier(.22,.61,.36,1), border-color 160ms cubic-bezier(.22,.61,.36,1);
 }
-.navbar--scrolled{
-  box-shadow: var(--shadow);
+.cpnav--scrolled {
   border-bottom-color: transparent;
+  box-shadow: 0 6px 24px rgba(17,24,39,.06);
 }
 
-.navbar__inner{
+.cpnav__inner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: .6rem 1rem;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-/* Logo tuned smaller */
-.navbar__brand{ display: inline-flex; align-items: center; gap:.5rem; }
-.navbar__logo{
-  height: 28px;                   /* desktop size */
-  width: auto;
-  object-fit: contain;
-  transform: translateZ(0);
-}
-
-/* Right side: menu + CTA + hamburger */
-.navbar__right{
+/* Logo on the left */
+.cpnav__brand {
   display: flex;
   align-items: center;
-  gap: .75rem;
-  min-width: 0;                   /* prevents overflow pushing CTA off-screen */
+  gap: 8px;
+}
+.cpnav__logo {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
 }
 
-/* Ant Menu reset + animated underline links */
-.navbar__menu{
-  border-bottom: none !important;
-  background: transparent !important;
-  font-weight: 500;
+/* Right: Menu + CTA */
+.cpnav__right{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  justify-content:flex-end;
+  flex:1;          /* ⬅️ give the right side room to host the menu */
+  min-width:0;     /* ⬅️ prevents flex children from forcing overflow */
+  white-space:nowrap;
 }
-.navbar__menu .ant-menu-item{
-  padding-inline: 12px !important;
+
+/* Menu should shrink a bit if needed instead of vanishing */
+.cpnav__menu{
+  border-bottom:none !important;
+  background:transparent !important;
+  font-family:"Poppins",system-ui,sans-serif;
+  font-weight:600;
+  flex:0 1 auto;         /* ⬅️ allow it to take available space */
 }
-.navbar__menu .ant-menu-item::after{ display:none; }
-.navbar__menu .ant-menu-item a,
-.navbar__menu .ant-menu-item{
-  color: var(--ink) !important;
+
+.cpnav__menu .ant-menu-item,
+.cpnav__menu .ant-menu-submenu{
+  padding-inline:12px !important;  /* slightly tighter so it fits */
+}
+.cpnav__menu .ant-menu-title-content {
+  color: #111827;
   position: relative;
-  transition: color var(--fast) var(--easing);
+  transition: color .2s ease;
 }
-.navbar__menu .ant-menu-item:hover,
-.navbar__menu .ant-menu-item:hover a{
-  color: var(--blue-700) !important;
-}
-.navbar__menu .ant-menu-item > span::before{
-  content:"";
-  position:absolute;
-  left: 10px;
-  right: 10px;
-  bottom: -6px;
-  height: 2px;
-  background: var(--blue-600);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--fast) var(--easing);
-}
-.navbar__menu .ant-menu-item:hover > span::before{
-  transform: scaleX(1);
+.cpnav__menu .ant-menu-submenu:hover .ant-menu-title-content,
+.cpnav__menu .ant-menu-item:hover .ant-menu-title-content {
+  color: #aa403e;
 }
 
-/* CTA micro-interaction */
-.navbar__cta{
-  background: var(--red) !important;
-  font-weight: 600;
-  padding: 0 16px;
-  transition: transform var(--fast) var(--easing), box-shadow var(--fast) var(--easing);
+/* Red CTA button */
+.cpnav__cta {
+  background: linear-gradient(90deg, #ff2b2b, #ff6a6a);
+  border: none;
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(255, 60, 60, .18);
 }
-.navbar__cta:hover{
-  background: var(--blue-700) !important;
-  border-color: var(--blue-700) !important;
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(31,78,216,.18);
+.cpnav__cta:hover {
+  filter: brightness(1.05);
 }
-.navbar__cta:active{ transform: translateY(0); box-shadow:none; }
 
-/* Hamburger only on tablets/phones */
-.navbar__hamburger{
+/* Mobile hamburger */
+.cpnav__hamburger {
   display: none;
-  color: var(--ink);
-  transition: transform var(--fast) var(--easing);
+  color: #111827;
 }
-.navbar__hamburger:hover{ transform: scale(1.05); }
 
-/* Drawer styling */
-.drawer__title{ display:flex; align-items:center; }
-.drawer__logo{ height: 24px; width:auto; }
-.drawer__menu{ border-inline: none; }
-.drawer__cta{
+/* Drawer */
+.cpnav__drawerHead { display: flex; align-items: center; gap: 8px; }
+.cpnav__drawerLogo { height: 26px; width: auto; }
+.cpnav__drawerMenu { border-inline: none; }
+.cpnav__drawerCta {
   margin-top: 12px;
-  background: var(--blue-600) !important;
-  border-color: var(--blue-600) !important;
+  background: linear-gradient(90deg, #ff2b2b, #ff6a6a);
+  border: none;
 }
 
-/* Responsive: collapse earlier so CTA never gets pushed off-screen */
+/* Keep hamburger hidden on desktop */
+@media (min-width: 993px){
+  .cpnav__hamburger{ display:none; }
+}
+
+/* On smaller screens we hide the menu and use the drawer */
 @media (max-width: 992px){
-  .navbar__menu{ display:none; }
-  .navbar__hamburger{ display:inline-flex; }
-}
-@media (max-width: 480px){
-  .navbar__logo{ height: 24px; }  /* even smaller logo on small phones */
-}
-
-/* Accessibility: reduced motion */
-@media (prefers-reduced-motion: reduce){
-  *, *::before, *::after{ transition: none !important; animation: none !important; }
+  .cpnav__menu{ display:none; }
+  .cpnav__hamburger{ display:inline-flex; }
 }

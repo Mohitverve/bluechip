@@ -1,64 +1,71 @@
 import React, { useEffect, useState } from "react";
+import { Menu, Button, Drawer } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
-import { Button, Drawer, Menu } from "antd";
-import "./../styles/navbar.css";
 import logo from "../assets/bluechip.png";
+import "../styles/navbar.css";
 
-const Navbar = () => {
+const items = [
+  {
+    key: "home",
+    label: "CyberPower Home",
+    
+  },
+  {
+    key: "products",
+    label: "CyberPower Products",
+    children: [
+      { key: "prod-ups", label: <a href="#ups">PFC Sinewave UPS</a> },
+      { key: "prod-pdu", label: <a href="#pdu">PDU & ATS</a> },
+      { key: "prod-access", label: <a href="#accessories">Professional</a> },
+    ],
+  },
+];
+
+export default function NavbarCyber() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 6);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const menuItems = [
-    { label: "Home", key: "home" },
-    { label: "Products", key: "products" },
-    
-    { label: "Contact", key: "contact" },
-  ];
-
   return (
-    <header className={`navbar ${scrolled ? "navbar--scrolled" : ""}`} role="banner">
-      <nav className="navbar__inner" aria-label="Primary">
-        {/* Logo (smaller + constrained) */}
-        <a href="/" className="navbar__brand" aria-label="Bluechip Home">
-          {/* width/height help CLS + performance */}
-          <img
-            src={logo}
-            alt="Bluechip"
-            className="navbar__logo"
-            width="128"
-            height="36"
-            decoding="async"
-          />
+    <header className={`cpnav ${scrolled ? "cpnav--scrolled" : ""}`} role="banner">
+      <nav className="cpnav__inner" aria-label="Primary">
+        {/* LEFT: Logo */}
+        <a href="/" className="cpnav__brand" aria-label="Bluechip Home">
+          <img src={logo} alt="Bluechip" className="cpnav__logo" width="128" height="36" />
         </a>
 
-        {/* Desktop menu + CTA */}
-        <div className="navbar__right">
-          <Menu
-            mode="horizontal"
-            items={menuItems}
-            className="navbar__menu"
-            selectable={false}
-          />
+        {/* RIGHT: Menu + CTA */}
+        <div className="cpnav__right">
+         <Menu
+  className="cpnav__menu"
+  mode="horizontal"
+  selectable={false}
+  items={items}
+  triggerSubMenuAction="hover"
+  overflowedIndicator={null}
+  disabledOverflow  // ⬅️ keep items visible; never collapse to "..."
+/>
           <Button
             type="primary"
             shape="round"
-            className="navbar__cta"
-            onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })}
+            className="cpnav__cta"
+            onClick={() =>
+              window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })
+            }
           >
-            Get Started
+            Become a Partner
           </Button>
 
-          {/* Mobile trigger */}
+          {/* Mobile hamburger */}
           <Button
             type="text"
-            className="navbar__hamburger"
+            className="cpnav__hamburger"
             aria-label="Open Menu"
             icon={<MenuOutlined />}
             onClick={() => setOpen(true)}
@@ -66,29 +73,34 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Drawer */}
+      {/* Mobile drawer */}
       <Drawer
+        placement="right"
+        open={open}
+        onClose={() => setOpen(false)}
         title={
-          <div className="drawer__title">
-            <img src={logo} alt="Bluechip" className="drawer__logo" width="110" height="30" />
+          <div className="cpnav__drawerHead">
+            <img src={logo} alt="Bluechip" className="cpnav__drawerLogo" width="110" height="30" />
           </div>
         }
-        placement="right"
-        onClose={() => setOpen(false)}
-        open={open}
       >
         <Menu
-          mode="vertical"
-          items={menuItems}
+          mode="inline"
+          items={items}
+          selectable={false}
+          className="cpnav__drawerMenu"
           onClick={() => setOpen(false)}
-          className="drawer__menu"
         />
-        <Button type="primary" shape="round" block className="drawer__cta" onClick={() => setOpen(false)}>
-          Get Started
+        <Button
+          type="primary"
+          shape="round"
+          block
+          className="cpnav__drawerCta"
+          onClick={() => setOpen(false)}
+        >
+          Become a Partner
         </Button>
       </Drawer>
     </header>
   );
-};
-
-export default Navbar;
+}

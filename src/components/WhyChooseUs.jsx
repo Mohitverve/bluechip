@@ -1,107 +1,73 @@
 import React from "react";
-import { Button, Card, Row, Col, Tag } from "antd";
+import { Card, Row, Col, Button } from "antd";
 import {
-  SafetyCertificateOutlined,
+  TrophyOutlined,
+  DollarOutlined,
   ThunderboltOutlined,
-  CustomerServiceOutlined,
-  CloudServerOutlined,
-  CheckCircleTwoTone,
+  SafetyCertificateOutlined,
 } from "@ant-design/icons";
-import "./../styles/why.css";
+import "../styles/why.css";
 
 const features = [
   {
-    icon: <SafetyCertificateOutlined />,
-    title: "Enterprise-grade security",
-    desc: "Modern controls, audits, and compliance baked in from day one.",
-    bullets: ["ISO/IEC-aligned processes", "Proactive vulnerability scanning", "Hardened configurations"],
+    icon: <TrophyOutlined />,
+    title: "Distributor of the Year (2020–2024)",
+    desc: "Recognised by CyberPower for five consecutive years of channel excellence and partner growth.",
+  },
+  {
+    icon: <DollarOutlined />,
+    title: "Competitive Partner Pricing",
+    desc: "Access exclusive CyberPower partner rates and bundled offers that maximise your margins.",
   },
   {
     icon: <ThunderboltOutlined />,
-    title: "Performance & uptime",
-    desc: "Power solutions designed for reliability under real workloads.",
-    bullets: ["High-efficiency designs", "Fast transfer time", "Redundant architectures"],
+    title: "Fast Local Delivery",
+    desc: "Fortnightly container arrivals keep CyberPower products in stock and ready for fast Australia-wide shipping.",
   },
   {
-    icon: <CustomerServiceOutlined />,
-    title: "Expert support",
-    desc: "Certified engineers and responsive SLAs—no runaround.",
-    bullets: ["Solution architects on call", "Clear escalation paths", "24×7 assistance options"],
+    icon: <SafetyCertificateOutlined />,
+    title: "Local Warranty & Advanced Replacement",
+    desc: "Up to 3-year warranty and 2-year advanced replacement on CyberPower UPS lines — fully backed by local support.",
   },
 ];
 
-const stats = [
-  { k: "99.99%", v: "Power availability" },
-  { k: "1,200+", v: "Deployments" },
-  { k: "30 min", v: "Avg. response" },
-  { k: "25+", v: "Cities served" },
-];
-
-const WhyChooseUs = () => {
+export default function WhyChooseUs() {
   return (
-    <section className="why" aria-labelledby="why-title">
-      <div className="why__container">
-        <header className="why__head">
-          <span className="why__kicker" aria-hidden="true">
-            <span className="dot" /> Why choose us
-          </span>
-          <h2 id="why-title">Why choose <span className="brand">Bluechip</span></h2>
+    <section className="whyblue" id="why-bluechip">
+      <div className="whyblue__container">
+        <header className="whyblue__head">
+          <h2>
+            Why Choose <span className="brand">Bluechip</span> as Your CyberPower Distributor
+          </h2>
           <p>
-            Reliable power solutions, measurable outcomes, and responsive support—engineered for modern infrastructure.
+            Trusted by resellers and MSPs across Australia for reliable CyberPower solutions,
+            expert support, and award-winning service.
           </p>
         </header>
 
-        <Row gutter={[16, 16]} className="why__stats" role="list">
-          {stats.map((s, i) => (
-            <Col xs={12} md={6} key={i} role="listitem">
-              <div className="stat">
-                <div className="stat__k">{s.k}</div>
-                <div className="stat__v">{s.v}</div>
-              </div>
-            </Col>
-          ))}
-        </Row>
-
-        <Row gutter={[16, 16]} className="why__grid">
-          {features.map((f, idx) => (
-            <Col xs={24} md={8} key={idx}>
-              <Card className="why__card" bordered>
-                <div className="why__icon" aria-hidden="true">{f.icon}</div>
-                <h3 className="why__title">{f.title}</h3>
-                <p className="why__desc">{f.desc}</p>
-                <ul className="why__list">
-                  {f.bullets.map((b, i) => (
-                    <li key={i}>
-                      <CheckCircleTwoTone twoToneColor="#e53935" />
-                      <span>{b}</span>
-                    </li>
-                  ))}
-                </ul>
+        <Row gutter={[20, 20]} className="whyblue__grid">
+          {features.map((f, i) => (
+            <Col xs={24} md={12} key={i}>
+              <Card className="whyblue__card" bordered={false}>
+                <div className="whyblue__icon">{f.icon}</div>
+                <div className="whyblue__content">
+                  <h3>{f.title}</h3>
+                  <p>{f.desc}</p>
+                </div>
               </Card>
             </Col>
           ))}
         </Row>
 
-        <div className="why__band" role="group" aria-label="Get help">
-          <div className="why__band-left">
-            <CloudServerOutlined className="why__band-icon" />
-            <div>
-              <h4>Ready to boost reliability?</h4>
-              <p className="why__band-sub">
-                Talk to our engineers and get a tailored power plan for your environment.
-              </p>
-            </div>
-          </div>
-          <div className="why__band-right">
-            <Button type="primary" shape="round" size="large" className="btn-red">
-              Get a Consultation
-            </Button>
-            <Button type="text" className="link-muted">See customer stories</Button>
-          </div>
+        <div className="whyblue__cta">
+          <Button type="primary" shape="round" size="large" className="btn-red">
+            Partner with Bluechip
+          </Button>
+          <Button type="text" className="link-muted">
+            View CyberPower Product Lines
+          </Button>
         </div>
       </div>
     </section>
   );
-};
-
-export default WhyChooseUs;
+}

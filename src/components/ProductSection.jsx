@@ -31,8 +31,8 @@ const PRODUCTS = {
     images: [pfc1, pfc2, pfc3],
   },
   duats: {
-    tab: "DU & ATS",
-    title: "DU & ATS",
+    tab: "PDU & ATS",
+    title: "PDU & ATS",
     subtitle: "Redundant power path with seamless source switching.",
     bullets: ["Dual-input redundancy", "Rack distribution", "Monitoring & events"],
     badges: ["Redundant", "Rackmount", "Monitoring"],
