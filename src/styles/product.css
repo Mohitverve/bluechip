@@ -63,8 +63,8 @@
   transition: background var(--fast) var(--ease), transform var(--fast) var(--ease), color var(--fast) var(--ease);
 }
 .tabs .ant-tabs-tab:hover {
-  background: #c62828 !important;     /* unified hover */
-  color: var(--ink) !important;
+  background: #d95656 !important;     /* unified hover */
+  color: white !important;
   transform: translateY(-1px);
 }
 .tabs .ant-tabs-tab-active {
