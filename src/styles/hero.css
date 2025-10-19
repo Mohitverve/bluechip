@@ -70,6 +70,7 @@
   color: #1c1e22;
   font: 800 clamp(30px, 5vw, 48px) "Poppins", system-ui, sans-serif;
   letter-spacing: -0.3px;
+  margin-bottom: 20px;
 }
 .cp-hero__title span {
   background: linear-gradient(90deg, #ff2b2b, #ff6a6a);
@@ -81,13 +82,10 @@
   font: 500 clamp(14px, 1.4vw, 16.5px) "Poppins", system-ui, sans-serif;
   line-height: 1.75;
   max-width: 56ch;
+  margin-bottom: 40px;
 }
 
-.cp-hero__bullets {
-  margin: 14px 0 10px; padding-left: 18px;
-  color: #d4dbe6; font: 600 13.5px "Poppins", system-ui, sans-serif;
-  line-height: 1.8;
-}
+
 .cp-hero__trust {
   display: inline-flex; align-items: center; gap: 8px;
   color: #14161a; font: 600 12.5px "Poppins", system-ui, sans-serif;
