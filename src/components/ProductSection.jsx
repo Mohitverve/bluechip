@@ -3,12 +3,12 @@ import { Tabs, Button, Tag } from "antd";
 import { LeftOutlined, RightOutlined, CheckCircleTwoTone } from "@ant-design/icons";
 import "./../styles/product.css";
 
-/* —— your existing image imports —— */
+/* Images */
 import pfc1 from "../assets/ups.jpg";
 import pfc2 from "../assets/ups2.png";
 import pfc3 from "../assets/ups3.png";
 
-import du1 from "../assets/ats1.jpeg";
+import du1 from "../assets/ats1.png";
 import du2 from "../assets/ats2.jpg";
 import du3 from "../assets/ats3.png";
 
@@ -19,13 +19,17 @@ import pro3 from "../assets/proups3.webp";
 /* Data */
 const PRODUCTS = {
   pfc: {
-    tab: "PFC Sinewave UPS",
+    tab: "PFC SineWave Series",
     title: "PFC Sinewave UPS",
     subtitle: "Pure sinewave output for sensitive loads, workstations, and servers.",
     bullets: [
-      "Pure sinewave for active PFC PSUs",
-      "High efficiency, low noise",
-      "Fast transfer time & surge protection",
+     "True sinewave output ensures stable and safe operation for sensitive electronics",
+
+"Automatic Voltage Regulation (AVR) delivers consistent power during fluctuations",
+
+"Intuitive LCD panel provides real-time system status and load information",
+
+"Energy-efficient design minimizes power consumption and operating costs",
     ],
     badges: ["Line-Interactive", "Rack / Tower", "Pure Sinewave"],
     images: [pfc1, pfc2, pfc3],
@@ -34,7 +38,17 @@ const PRODUCTS = {
     tab: "PDU & ATS",
     title: "PDU & ATS",
     subtitle: "Redundant power path with seamless source switching.",
-    bullets: ["Dual-input redundancy", "Rack distribution", "Monitoring & events"],
+    bullets: [
+      "Wide range of rackmount PDUs and ATS solutions, including metered, switched, and managed models",
+
+"Ideal for server racks, data centers, and mission-critical infrastructure",
+
+"Backed by expert technical support, fast Australia-wide delivery, and competitive pricing",
+
+"Designed for reliable, scalable, and efficient power distribution in IT environments",
+    
+    
+    ],
     badges: ["Redundant", "Rackmount", "Monitoring"],
     images: [du1, du2, du3],
   },
@@ -42,13 +56,24 @@ const PRODUCTS = {
     tab: "CyberPower Professional Series UPS",
     title: "CyberPower Professional Series UPS",
     subtitle: "Enterprise-grade protection with scalable runtime.",
-    bullets: ["Line-interactive / Online", "ABM battery care", "External battery packs"],
+    bullets: [
+      
+    "Business-grade line-interactive UPS engineered for servers, networking, and telecom systems",
+
+"Features Automatic Voltage Regulation (AVR) to handle power fluctuations effectively",
+
+"Integrates GreenPower UPS™ technology for higher efficiency and longer battery life",
+
+"Offers LCD status display, data line protection, and advanced management software for full control",
+    
+    
+    ],
     badges: ["Enterprise", "Scalable", "High Reliability"],
     images: [pro1, pro2, pro3],
   },
 };
 
-/* Minimal gallery (no carousels, no heavy refs) */
+/* Minimal gallery */
 const Gallery = memo(({ images }) => {
   const [i, setI] = useState(0);
   const total = images.length;
@@ -80,7 +105,7 @@ const Gallery = memo(({ images }) => {
       </div>
 
       <div className="g-dots" role="tablist" aria-label="Image selector">
-        {images.map((src, idx) => (
+        {images.map((_, idx) => (
           <button
             key={idx}
             onClick={() => setI(idx)}
@@ -94,16 +119,23 @@ const Gallery = memo(({ images }) => {
   );
 });
 
+/* Product block — image left, info right */
 const ProductBlock = memo(({ p }) => (
   <div className="p-row">
-    <div className="p-left">
+    {/* LEFT: images */}
+    <div className="p-media">
+      <Gallery images={p.images} />
+    </div>
+
+    {/* RIGHT: info */}
+    <div className="p-info">
       <h2 className="p-title">{p.title}</h2>
       <p className="p-sub">{p.subtitle}</p>
 
       <ul className="p-list">
         {p.bullets.map((b, i) => (
-          <li key={i}>
-            <CheckCircleTwoTone twoToneColor="#1f4ed8" />
+          <li key={i} style={{ animationDelay: `${80 * (i + 1)}ms` }}>
+            <CheckCircleTwoTone twoToneColor="#e53935" />
             <span>{b}</span>
           </li>
         ))}
@@ -111,7 +143,7 @@ const ProductBlock = memo(({ p }) => (
 
       <div className="p-tags">
         {p.badges.map((b, i) => (
-          <Tag key={i} color="blue">
+          <Tag key={i} className="tag-pill">
             {b}
           </Tag>
         ))}
@@ -119,16 +151,12 @@ const ProductBlock = memo(({ p }) => (
 
       <div className="p-ctas">
         <Button type="primary" shape="round" className="btn-primary">
-          Explore
+          View Series
         </Button>
         <Button type="text" className="btn-text">
-          Talk to Sales
+          Partner Pricing
         </Button>
       </div>
-    </div>
-
-    <div className="p-right">
-      <Gallery images={p.images} />
     </div>
   </div>
 ));
@@ -150,8 +178,9 @@ export default function ProductSection() {
     <section className="section">
       <div className="container">
         <header className="head">
-          <h1>Our Product Range</h1>
-          <p>Reliable power solutions for modern infrastructure.</p>
+          <h1>CyberPower Product Lineup</h1>
+          <p>Explore our most popular CyberPower UPS and power distribution systems — designed for every business need, available through Bluechip IT.
+</p>
         </header>
 
         <Tabs
