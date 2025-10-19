@@ -1,10 +1,10 @@
 import React from "react";
-import { Button, Form, Input, Select, message } from "antd";
-import { SendOutlined } from "@ant-design/icons";
-import "./../styles/hero.css";
-import logo from "../assets/cyberpro.png";
+import { Form, Input, Button, Card, message } from "antd";
+import { ArrowRightOutlined, AppstoreOutlined } from "@ant-design/icons";
+import logo from "../assets/cyberpro.png"; // ✅ Your CyberPower logo
+import "../styles/hero.css";
 
-const Hero = () => {
+export default function CyberpowerHero({ onViewProducts }) {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
@@ -13,123 +13,132 @@ const Hero = () => {
     form.resetFields();
   };
 
+  const scrollToForm = () => {
+    const el = document.getElementById("partner-form");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
+
   return (
-    <section className="hero" aria-label="CyberPro hero">
-      <div className="hero__inner">
-        {/* Left Section */}
-        <div className="hero__left">
-          <img
-            src={logo}
-            alt="Bluechip"
-            width="150"
-            height="42"
-            decoding="async"
-            className="hero__logo"
-          />
-          <p className="hero__powered">
-            powered by <span>bluechip</span>
-          </p>
+    <section className="cp-hero">
+      <div className="cp-blob cp-blob--one" />
+      <div className="cp-blob cp-blob--two" />
 
-          <h1 className="hero__title">
-            CyberPower — <span className="hero__title-accent">secure, simple,</span> and built for scale.
-          </h1>
-          <p className="hero__subtitle">
-            End-to-end cybersecurity services for modern vendors. Compliance, monitoring, and rapid response without the noise.
-          </p>
+      <div className="cp-wrap">
+        <div className="cp-grid-top">
+          {/* LEFT SECTION */}
+          <div className="cp-left">
+            <div className="cp-head cp-head--stacked">
+              <img
+                src={logo}
+                alt="CyberPower logo"
+                className="cp-logo cp-logo--medium"
+              />
+              <p className="cp-tag cp-tag--below">
+                Authorised CyberPower Distributor in Australia
+              </p>
+            </div>
 
-          <Button
-            type="primary"
-            shape="round"
-            size="large"
-            className="hero__cta"
-            icon={<SendOutlined />}
-            onClick={() =>
-              document
-                .getElementById("quote-form")
-                ?.scrollIntoView({ behavior: "smooth", block: "center" })
-            }
-          >
-            Get a Free Quote
-          </Button>
-        </div>
+            <h1 className="cp-title">
+              <span className="cp-red">Power Protection</span> You Can{" "}
+              <span className="cp-red">Trust</span>
+            </h1>
 
-        {/* Right Section - Single Step Form */}
-        <div className="hero__right" id="quote-form">
-          <div className="quote-card">
-            <h3 className="quote-card__title">Request a Quote</h3>
+            <p className="cp-sub">
+              Expert advice, competitive pricing, and fast local support for
+              resellers and MSPs across Australia.
+            </p>
+            <p className="cp-sub-cta">
+              <strong>Start your partnership with Bluechip IT today.</strong>
+            </p>
 
-            <Form
-              form={form}
-              layout="vertical"
-              onFinish={onFinish}
-              name="singleQuoteForm"
-              className="quote-form"
-              requiredMark="optional"
-            >
-              <Form.Item
-                name="name"
-                label="Full Name"
-                rules={[{ required: true, message: "Please enter your full name" }]}
+            <div className="cp-cta">
+              <Button
+                type="primary"
+                size="large"
+                className="cp-btn cp-btn--primary"
+                onClick={scrollToForm}
               >
-                <Input placeholder="Jane Doe" allowClear />
-              </Form.Item>
+                Become a Partner <ArrowRightOutlined />
+              </Button>
 
-              <Form.Item
-                name="email"
-                label="Email"
-                rules={[
-                  { required: true, message: "Please enter your email" },
-                  { type: "email", message: "Enter a valid email" },
-                ]}
+              <Button
+                size="large"
+                className="cp-btn cp-btn--ghost"
+                onClick={onViewProducts}
               >
-                <Input placeholder="jane@company.com" allowClear />
-              </Form.Item>
+                <AppstoreOutlined /> View Product Lines
+              </Button>
+            </div>
 
-              <Form.Item
-                name="company"
-                label="Company Name"
-                rules={[{ required: true, message: "Please enter your company name" }]}
-              >
-                <Input placeholder="Bluechip Pvt Ltd" allowClear />
-              </Form.Item>
+            <div className="cp-trustline">
+              <span className="cp-trust-dot" />
+              Distributor of the Year 2020–2024
+            </div>
+          </div>
 
-              <Form.Item
-                name="country"
-                label="Country"
-                rules={[{ required: true, message: "Please select your country" }]}
-              >
-                <Select
-                  showSearch
-                  placeholder="Select a country"
-                  options={[
-                    { label: "India", value: "India" },
-                    { label: "United States", value: "USA" },
-                    { label: "United Kingdom", value: "UK" },
-                    { label: "Australia", value: "Australia" },
-                    { label: "Canada", value: "Canada" },
-                  ]}
-                />
-              </Form.Item>
+          {/* RIGHT SECTION - Glass Form */}
+          <div className="cp-right">
+            <Card id="partner-form" className="cp-card glass-form" bordered={false}>
+              <div className="cp-card-head">
+                <h3 className="cp-card-title">Become a Partner</h3>
+                <p className="cp-card-sub">
+                Register your interest to become an authorised reseller or MSP partner for CyberPower power solutions.
 
-              <Form.Item
-                name="message"
-                label="Comments or Message"
-                rules={[{ required: true, message: "Please enter your message" }]}
-              >
-                <Input.TextArea placeholder="Tell us what you’re looking for…" rows={4} />
-              </Form.Item>
-
-              <div className="quote-actions">
-                <Button type="primary" htmlType="submit" className="btn-primary" icon={<SendOutlined />}>
-                  Submit Request
-                </Button>
+                </p>
               </div>
-            </Form>
+
+              <Form
+                form={form}
+                layout="vertical"
+                onFinish={onFinish}
+                requiredMark={false}
+              >
+                <Form.Item
+                  name="fullname"
+                  label="Full Name"
+                  rules={[{ required: true, message: "Please enter your full name" }]}
+                >
+                  <Input placeholder="Your full name" size="large" />
+                </Form.Item>
+
+                <Form.Item
+                  name="email"
+                  label="Business Email"
+                  rules={[
+                    { required: true, message: "Please enter your business email" },
+                    { type: "email", message: "Please enter a valid email" },
+                  ]}
+                >
+                  <Input placeholder="you@company.com" size="large" />
+                </Form.Item>
+
+                <Form.Item
+                  name="company"
+                  label="Company Name"
+                  rules={[{ required: true, message: "Please enter your company name" }]}
+                >
+                  <Input placeholder="e.g., Cyber Systems Pty Ltd" size="large" />
+                </Form.Item>
+
+                <Form.Item name="phone" label="Phone (optional)">
+                  <Input placeholder="+61 4XX XXX XXX" size="large" />
+                </Form.Item>
+
+                <Form.Item name="message" label="Message / Enquiry">
+                  <Input.TextArea
+                    placeholder="Tell us what you're looking for..."
+                    autoSize={{ minRows: 3, maxRows: 6 }}
+                  />
+                </Form.Item>
+
+                <Button htmlType="submit" type="primary" size="large" className="cp-submit">
+                  Submit Application
+                </Button>
+              </Form>
+            </Card>
           </div>
         </div>
       </div>
     </section>
   );
-};
-
-export default Hero;
+}
