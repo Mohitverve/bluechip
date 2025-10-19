@@ -1,0 +1,178 @@
+/* Bento “Why CyberPower?” — white theme, red accents, micro animations */
+
+:root{
+  --red:#e53935;
+  --red-08:rgba(229,57,53,.08);
+  --ink:#0f172a;
+  --muted:#6b7280;
+  --line:#e6eaf2;
+  --panel:#ffffff;
+  --shadow-sm:0 3px 16px rgba(15,23,42,.06);
+  --shadow-lg:0 20px 50px rgba(15,23,42,.12);
+  --fast:200ms;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+.wb{
+  background:#fff;
+  padding:96px 16px;
+  font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+}
+.wb__grid{
+  max-width:1200px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: minmax(120px, auto);
+  gap:18px;
+}
+
+/* Tiles base */
+.wb__tile{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:18px;
+  box-shadow:var(--shadow-sm);
+  opacity:0; transform:translateY(10px);
+  transition:opacity .55s var(--ease), transform .55s var(--ease), box-shadow var(--fast) var(--ease), transform var(--fast) var(--ease);
+}
+.wb__tile.is-visible{ opacity:1; transform:none; }
+.wb__tile:hover{ box-shadow:var(--shadow-lg); transform:translateY(-3px); }
+
+/* Lead tile spans (left-top) */
+.wb__lead{
+  grid-column: 1 / span 7;   /* wider on the left */
+  grid-row: 1 / span 2;
+  display:flex; flex-direction:column; justify-content:center;
+  padding:28px 24px;
+}
+.wb__kicker{
+  font-weight:800; letter-spacing:.14em; text-transform:uppercase; font-size:12px;
+  color:#9aa4b2; margin-bottom:8px;
+}
+.wb__lead h2{
+  margin:.1rem 0 .6rem;
+  font-size: clamp(30px, 3.8vw, 52px);
+  line-height:1.1;
+  color:var(--ink);
+  font-weight:800;
+  letter-spacing:-.5px;
+}
+.wb__lead h2 span{ color:var(--red); }
+.wb__leadcopy{
+  margin:0;
+  color:var(--muted);
+  font-size:16.5px;
+  line-height:1.75;
+  max-width: 60ch;
+}
+
+/* Video tile spans (right, same height as lead) */
+.wb__video{
+  grid-column: 8 / span 5;
+  grid-row: 1 / span 2;
+  display:flex; flex-direction:column; justify-content:center;
+}
+.wb__frame{
+  width:100%;
+  aspect-ratio:16/9;
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  background:#0b0f18;
+}
+.wb__frame iframe{ width:100%; height:100%; border:0; display:block; }
+.wb__caption{ margin-top:8px; color:#6b7788; font-size:13.5px; }
+
+/* Feature tiles (row 3) */
+/* Feature tiles (row 3) */
+.wb__features {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin-top: 36px;
+}
+
+.wb__feat {
+  flex: 1 1 250px;
+  max-width: 270px;
+  min-height: 230px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
+  transition: transform var(--fast) var(--ease), box-shadow var(--fast) var(--ease);
+}
+
+.wb__feat:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.wb__feat h3 {
+  margin: 10px 0 6px;
+  color: var(--ink);
+  font-weight: 800;
+  letter-spacing: -0.2px;
+  font-size: 17px;
+}
+
+.wb__feat p {
+  margin: 0;
+  color: #374151;
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+/* Centered icon */
+.wb__icon {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--red-08);
+  color: var(--red);
+  font-size: 18px;
+  margin-bottom: 6px;
+  transition: transform var(--fast) var(--ease), background var(--fast) var(--ease);
+}
+
+.wb__feat:hover .wb__icon {
+  transform: translateY(-3px);
+}
+
+/* Subtle red top accent */
+.wb__feat::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  top: 0;
+  height: 3px;
+  border-radius: 0 0 6px 6px;
+  background: linear-gradient(90deg, rgba(229,57,53,0), rgba(229,57,53,.5), rgba(229,57,53,0));
+}
+
+/* Responsive - stack neatly */
+@media (max-width: 900px) {
+  .wb__features {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .wb__feat {
+    width: 100%;
+    max-width: 440px;
+  }
+}
