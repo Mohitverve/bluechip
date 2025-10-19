@@ -3,7 +3,7 @@
 .cp-hero {
   position: relative;
   overflow: clip;
-  background: #eeeeee;                /* deep techy base */
+  background: #ffffff;                /* deep techy base */
   padding: clamp(40px, 7vw, 96px) 16px;
   isolation: isolate;
 }

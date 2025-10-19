@@ -150,10 +150,10 @@ const ProductBlock = memo(({ p }) => (
       </div>
 
       <div className="p-ctas">
-        <Button type="primary" shape="round" className="btn-primary">
+        <Button type="text" shape="round" className="btn-text">
           View Series
         </Button>
-        <Button type="text" className="btn-text">
+        <Button type="primary" className="btn-primary">
           Partner Pricing
         </Button>
       </div>
