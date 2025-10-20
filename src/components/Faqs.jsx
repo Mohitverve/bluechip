@@ -1,0 +1,135 @@
+import React, { useState } from "react";
+import { Tabs, Collapse, Input } from "antd";
+import {
+  DollarOutlined,
+  AppstoreOutlined,
+  SafetyCertificateOutlined,
+  SearchOutlined,
+} from "@ant-design/icons";
+import "../styles/faqs.css";
+
+const { Panel } = Collapse;
+
+// === EXACT questions & answers from your message ===
+const DATA = {
+  pricing: [
+    {
+      key: "q1",
+      q: "Can I purchase CyberPower products directly from Bluechip?",
+      a: `Yes. Bluechip IT is an authorised CyberPower distributor in Australia and New Zealand. Purchase genuine UPS units via our sales team or Bluechip Portal, with full warranty and local support. Not a partner yet? Register your interest here.`,
+    },
+    {
+      key: "q2",
+      q: "How can I view CyberPower product pricing?",
+      a: `View pricing via Bluechip Portal or contact our sales team for personalised quotes, including bulk orders. 
+Once you’re a Bluechip reseller, you can log in to our partner portal to access the full CyberPower Hero Products, including BRICs LCD, Professional Rackmount, RT33 (3-Phase), PFC Sinewave, Online, and Remote Management Card — with complete product listings and pricing. 
+For pricing questions, quotes, or bulk order support, contact our sales team or reach out to your local Bluechip representative.`,
+    },
+  ],
+  stock: [
+    {
+      key: "q3",
+      q: "How do I check which CyberPower products are in stock?",
+      a: `Check real-time stock on Bluechip Portal, with fortnightly shipments keeping popular and specialised models available. 
+Once you’re a Bluechip partner, you can log in to our reseller portal to browse the full CyberPower catalogue. 
+If you can’t find what you’re looking for or have questions about stock availability, feel free to contact our team or reach out to your local Bluechip representative.`,
+    },
+    {
+      key: "q4",
+      q: "Does Bluechip stock all CyberPower products?",
+      a: `Yes. We carry CyberPower Hero Products, from office UPS units to enterprise rackmount solutions and PDUs. Ready to become a Bluechip partner? Click here.`,
+    },
+  ],
+  support: [
+    {
+      key: "q5",
+      q: "What warranty and support can I expect from Bluechip?",
+      a: `All products come with manufacturer warranty and many models include advanced replacement. Local support is available for installation, configuration, and troubleshooting. Start your partnership with Bluechip. To sign up, click here.`,
+    },
+  ],
+};
+
+export default function Faqs() {
+  const [activeTab, setActiveTab] = useState("pricing");
+  const [query, setQuery] = useState("");
+
+  const filterItems = (arr) =>
+    arr.filter(
+      ({ q, a }) =>
+        q.toLowerCase().includes(query.toLowerCase()) ||
+        a.toLowerCase().includes(query.toLowerCase())
+    );
+
+  const renderCollapse = (arr) => (
+    <Collapse accordion bordered={false} className="faq__collapse" expandIconPosition="end">
+      {filterItems(arr).map(({ key, q, a }) => (
+        <Panel header={q} key={key}>
+          <p className="faq__answer">{a}</p>
+        </Panel>
+      ))}
+    </Collapse>
+  );
+
+  const tabItems = [
+    {
+      key: "pricing",
+      label: (
+        <span>
+          <DollarOutlined /> Pricing & Purchasing
+        </span>
+      ),
+      children: renderCollapse(DATA.pricing),
+    },
+    {
+      key: "stock",
+      label: (
+        <span>
+          <AppstoreOutlined /> Stock & Availability
+        </span>
+      ),
+      children: renderCollapse(DATA.stock),
+    },
+    {
+      key: "support",
+      label: (
+        <span>
+          <SafetyCertificateOutlined /> Warranty & Support
+        </span>
+      ),
+      children: renderCollapse(DATA.support),
+    },
+  ];
+
+  return (
+    <section className="faq">
+      <div className="faq__wrap">
+        <header className="faq__head">
+          <span className="faq__kicker">FAQs</span>
+          <h2>
+            Everything you need to know about <span>CyberPower.</span>
+          </h2>
+          <p>Browse by topic or search across all answers.</p>
+
+          <div className="faq__search">
+            <Input
+              size="large"
+              prefix={<SearchOutlined />}
+              placeholder="Search questions…"
+              allowClear
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+          </div>
+        </header>
+
+        <Tabs
+          items={tabItems}
+          activeKey={activeTab}
+          onChange={setActiveTab}
+          className="faq__tabs"
+          destroyInactiveTabPane={false} // keeps all loaded
+        />
+      </div>
+    </section>
+  );
+}

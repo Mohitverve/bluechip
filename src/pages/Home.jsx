@@ -4,6 +4,7 @@ import ProductSection from '../components/ProductSection'
 import WhyChooseUs from '../components/WhyChooseUs'
 import WhyCyberPower from '../components/WhyCyberPower'
 import Advantages from '../components/Advantages'
+import Faqs from '../components/Faqs'
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
       <ProductSection/>
       <WhyCyberPower/>
       <Advantages/>
+      <Faqs/>
     </div>
   )
 }
