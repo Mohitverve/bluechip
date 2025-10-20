@@ -54,8 +54,7 @@ export default function Hero() {
         <div className="cp-hero__shell">
           <div className="cp-hero__logoRow">
             <img src={logo} alt="CyberPower" className="cp-hero__logo" />
-            <span className="cp-hero__badge">Authorised CyberPower Distributor in Australia
-</span>
+           
           </div>
 
           <h1 className="cp-hero__title">

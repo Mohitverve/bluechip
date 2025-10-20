@@ -121,7 +121,7 @@ export default function Faqs() {
         <header className="faq__head">
           <span className="faq__kicker">FAQs</span>
           <h2>
-            Everything you need to know about <span>CyberPower</span>
+            Frequently Asked  <span>Questions</span>
           </h2>
           <p>Browse by topic or search across all answers.</p>
 
