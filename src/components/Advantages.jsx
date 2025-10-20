@@ -93,7 +93,7 @@ export default function Advantages() {
         <header className="adv__head">
           
           <h2 id="adv-title">
-           Key Competitive  <span>Advantages</span>.
+           Key Competitive  <span>Advantages</span>
           </h2>
           <p>
             Why partners choose CyberPower — performance, reliability, and dedicated support that help resellers deliver more value to their customers.
