@@ -1,0 +1,23 @@
+/* index.css or app.css */
+:root{
+  --section-gap: clamp(32px, 4vw, 72px);    /* space between sections */
+  --section-pad: clamp(40px, 5vw, 80px);    /* inner padding (top+bottom) */
+}
+
+/* all first-level sections inside main get consistent rhythm */
+main > section {
+  margin-block: var(--section-gap);
+  padding-block: var(--section-pad);
+}
+
+/* optional utilities to tighten/loosen per section */
+[data-spacing="tight"] { --section-gap: 24px; --section-pad: 28px; }
+[data-spacing="loose"] { --section-gap: 96px; --section-pad: 96px; }
+
+/* responsive tweak if you like */
+@media (max-width: 768px){
+  :root {
+    --section-gap: clamp(24px, 4vw, 48px);
+    --section-pad: clamp(28px, 5vw, 56px);
+  }
+}
