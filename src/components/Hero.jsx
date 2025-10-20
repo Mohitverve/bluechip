@@ -64,7 +64,11 @@ export default function Hero() {
          <p className="cp-hero__sub">
   Expert advice, competitive pricing, and fast local support for resellers and MSPs across Australia.
   <br />
-  <strong>Start your partnership with Bluechip IT today.</strong>
+ 
+</p>
+
+<p>
+   <strong >Start your partnership with Bluechip IT today.</strong>
 </p>
 
 {/* CTA Buttons */}
