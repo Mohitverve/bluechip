@@ -1,288 +1,179 @@
-/* CyberPower Hero — scoped to .cp-hero */
+/* =========================================
+   CyberPower Hero — white theme + red accents
+   Perf-minded: CLS-safe, low paint cost, content-visibility
+========================================= */
 
-.cp-hero {
-  position: relative;
-  overflow: clip;
-  background: #ffffff;                /* deep techy base */
-  padding: clamp(40px, 7vw, 96px) 16px;
-  isolation: isolate;
-}
-
-/* animated background red glows */
-.cp-hero__glow {
-  position: absolute; inset: auto;
-  filter: blur(60px);
-  opacity: .5;
-  pointer-events: none;
-  transform: translateZ(0);
-  animation: float 10s ease-in-out infinite;
-}
-.cp-hero__glow--1 {
-  width: 360px; height: 360px; border-radius: 50%;
-  left: -120px; top: -120px;
-  background: radial-gradient(closest-side, #ff3b3b, transparent 70%);
-  animation-delay: 0s;
-}
-.cp-hero__glow--2 {
-  width: 420px; height: 420px; border-radius: 50%;
-  right: -140px; bottom: -140px;
-  background: radial-gradient(closest-side, #ff6a6a, transparent 70%);
-  animation-delay: 1.2s;
-}
-@keyframes float {
-  0%,100% { transform: translateY(0) }
-  50%     { transform: translateY(-8px) }
+:root{
+  --red-500:#e53935;
+  --red-600:#c62828;
+  --ink:#1c1e22;
+  --muted:#313842;
+  --line:#e9eef3;
+  --panel:#ffffff;
 }
 
-.cp-hero__wrap {
-  max-width: 1184px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
-  gap: clamp(18px, 3vw, 32px);
+/* Reserve space & allow incremental rendering */
+.cp-hero{
+  position:relative;
+  background:#fff;
+  padding:clamp(40px, 7vw, 96px) 16px;
+  isolation:isolate;
+  content-visibility:auto;
+  contain-intrinsic-size: 800px 600px;
+  overflow:clip;
 }
 
-/* LEFT: narrative */
-.cp-hero__shell {
-  padding: clamp(6px, 1vw, 10px);
-  color: #232b39;
-  opacity: 0; transform: translateY(10px);
-  transition: opacity .45s ease, transform .45s ease;
+/* subtle, cheap glows (no heavy blur on low-end) */
+.cp-hero__glow{
+  position:absolute; inset:auto;
+  filter:blur(40px);
+  opacity:.42;
+  pointer-events:none;
+  transform:translateZ(0);
+  animation:float 10s ease-in-out infinite;
 }
-.cp-hero__shell.is-visible { opacity: 1; transform: none; }
+.cp-hero__glow--1{
+  width:320px; height:320px; border-radius:50%;
+  left:-100px; top:-100px;
+  background:radial-gradient(closest-side, rgba(229,57,53,.25), transparent 70%);
+  animation-delay:0s;
+}
+.cp-hero__glow--2{
+  width:360px; height:360px; border-radius:50%;
+  right:-120px; bottom:-120px;
+  background:radial-gradient(closest-side, rgba(229,57,53,.18), transparent 70%);
+  animation-delay:1.2s;
+}
+@keyframes float{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
 
-.cp-hero__logoRow {
-  display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
-}
-.cp-hero__logo {
-  height: 60px; width: auto; display: block; filter: drop-shadow(0 2px 8px rgba(255, 72, 72, .25)); margin-bottom: 20px;
-}
-.cp-hero__badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 6px 10px; border-radius: 999px;
-  background: rgba(255, 75, 75, .1);
-  color: #ff4d4f; border: 1px solid rgba(255, 75, 75, .35);
-  font: 700 12px "Poppins", system-ui, sans-serif;
-}
-
-.cp-hero__title {
-  margin: 8px 0 6px;
-  color: #1c1e22;
-  font: 800 clamp(30px, 5vw, 48px) "Poppins", system-ui, sans-serif;
-  letter-spacing: -0.3px;
-  margin-bottom: 20px;
-}
-.cp-hero__title span {
-  background: linear-gradient(90deg, #ff2b2b, #ff6a6a);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
+.cp-hero__wrap{
+  max-width:1184px; margin:0 auto;
+  display:grid; gap:clamp(18px,3vw,32px);
+  grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
 }
 
-.cp-hero__sub {
-  color: #313842;
-  font: 500 clamp(14px, 1.4vw, 16.5px) "Poppins", system-ui, sans-serif;
-  line-height: 1.75;
-  max-width: 56ch;
-  margin-bottom: 40px;
+/* LEFT column */
+.cp-hero__shell{
+  padding:clamp(6px,1vw,10px);
+  color:var(--ink);
+  opacity:0; transform:translateY(10px);
+  transition:opacity .35s ease, transform .35s ease;
+}
+.cp-hero__shell.is-visible{ opacity:1; transform:none; }
+
+.cp-hero__logoRow{ display:flex; align-items:center; gap:12px; margin-bottom:10px; }
+.cp-hero__logo{ height:38px; width:auto; display:block; margin-bottom:16px; }
+
+.cp-hero__title{
+  margin:8px 0 10px;
+  color:var(--ink);
+  font:800 clamp(30px,5vw,48px) "Poppins",system-ui,sans-serif;
+  letter-spacing:-.3px;
+}
+.cp-hero__title span{
+  background:linear-gradient(90deg, var(--red-500), #ff6a6a);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
 }
 
+.cp-hero__sub{
+  color:var(--muted);
+  font:500 clamp(14px,1.4vw,16.5px) "Poppins",system-ui,sans-serif;
+  line-height:1.75;
+  max-width:56ch;
+  margin:0 0 12px;
+}
+.cp-hero__sub-strong{ margin:0 0 20px; }
 
-.cp-hero__trust {
-  display: inline-flex; align-items: center; gap: 8px;
-  color: #14161a; font: 600 12.5px "Poppins", system-ui, sans-serif;
-}
-.cp-hero__trust .dot {
-  width: 8px; height: 8px; border-radius: 999px; background: #27c93f;
-  box-shadow: 0 0 0 4px rgba(39,201,63,.14);
-}
-
-/* RIGHT: form card (glass + red focus) */
-.cp-hero__formCard {
-  background: rgba(14, 18, 26, .65);
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 16px;
-  box-shadow: 0 16px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.04);
-  backdrop-filter: blur(8px);
-  padding: clamp(14px, 2.2vw, 22px);
-  color: #e9eef6;
-  transform: translateY(8px);
-  opacity: 0;
-  transition: transform .45s ease, opacity .45s ease, box-shadow .2s ease, border-color .2s ease;
-  margin-top: -30px;
-}
-.cp-hero__formCard.is-visible { transform: none; opacity: 1; }
-.cp-hero__formCard:hover {
-  border-color: rgba(255,255,255,.16);
-  box-shadow: 0 18px 48px rgba(0,0,0,.42), 0 0 0 6px rgba(255, 77, 79, .06);
+.cp-hero__ctaRow{
+  display:flex; gap:12px; margin:18px 0 12px; flex-wrap:wrap;
 }
 
-.cp-hero__formHead h3 {
-  margin: 2px 0 2px;
-  font: 700 16px "Poppins", system-ui, sans-serif;
-  color: #ffffff;
-}
-.cp-hero__formHead p {
-  margin: 0 0 10px; color: #aab6c8; font: 500 13px "Poppins", system-ui, sans-serif;
+.cp-hero__ctaBtn{
+  height:46px; padding:0 20px;
+  font:700 15px "Poppins",system-ui,sans-serif;
+  border-radius:12px; transition:transform .2s ease, filter .2s ease;
 }
 
-/* antd field labels alignment */
-.cp-hero__form .ant-form-item-label > label {
-  font-weight: 700; color: #e9eef6;
+/* red primary */
+.cp-hero__ctaBtn--primary{
+  background:linear-gradient(90deg, var(--red-500), #ff6a6a);
+  border:none; color:#fff;
+  box-shadow:0 8px 18px rgba(229,57,53,.18);
+}
+.cp-hero__ctaBtn--primary:hover{ filter:brightness(1.05); transform:translateY(-2px); }
+
+/* outline */
+.cp-hero__ctaBtn--outline{
+  background:transparent; border:1.5px solid var(--red-500); color:var(--red-500);
+}
+.cp-hero__ctaBtn--outline:hover{ background:var(--red-500); color:#fff; transform:translateY(-2px); }
+
+.cp-hero__trust{
+  display:inline-flex; align-items:center; gap:8px;
+  color:#14161a; font:600 12.5px "Poppins",system-ui,sans-serif;
+}
+.cp-hero__trust .dot{
+  width:8px; height:8px; border-radius:999px; background:#27c93f;
+  box-shadow:0 0 0 4px rgba(39,201,63,.14);
 }
 
-/* grid for inputs */
-.cp-hero__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+/* RIGHT column — white card (no backdrop-filter) */
+.cp-hero__formCard{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:16px;
+  box-shadow:0 10px 28px rgba(15,23,42,.08);
+  padding:clamp(14px, 2.2vw, 22px);
+  color:var(--ink);
+  transform:translateY(8px);
+  opacity:0;
+  transition:transform .35s ease, opacity .35s ease, box-shadow .2s ease, border-color .2s ease;
+  margin-top:-10px;
 }
-.cp-hero__grid .ant-form-item:last-child {
-  grid-column: 1 / -1; /* textarea full width */
+.cp-hero__formCard.is-visible{ transform:none; opacity:1; }
+.cp-hero__formCard:hover{ box-shadow:0 14px 34px rgba(15,23,42,.10); }
+
+.cp-hero__formHead h3{
+  margin:2px 0 2px; font:700 16px "Poppins",system-ui,sans-serif; color:var(--ink);
+}
+.cp-hero__formHead p{ margin:0 0 10px; color:#4b5563; font:500 13px "Poppins",system-ui,sans-serif; }
+
+/* antd labels */
+.cp-hero__form .ant-form-item-label > label{
+  font-weight:700; color:#20232b;
 }
 
-/* primary CTA with red accent */
-.cp-hero__cta {
-  width: 100%;
-  height: 46px;
-  border-radius: 12px;
-  margin-top: 8px;
-  background: linear-gradient(90deg, #ff2b2b, #ff6a6a);
-  border: none;
-  box-shadow: 0 10px 26px rgba(255, 60, 60, .2);
+/* inputs grid */
+.cp-hero__grid{
+  display:grid; grid-template-columns:1fr 1fr; gap:12px;
 }
-.cp-hero__cta:hover { filter: brightness(1.02); }
-.cp-hero__cta:active { transform: translateY(1px); }
+.cp-hero__grid .ant-form-item:last-child{ grid-column:1 / -1; }
 
-.cp-hero__footnote {
-  margin-top: 8px; color: #95a4b9;
-  font: 600 12px "Poppins", system-ui, sans-serif;
+/* submit CTA */
+.cp-hero__cta{
+  width:100%; height:46px; border-radius:12px; margin-top:8px;
+  background:linear-gradient(90deg, var(--red-500), #ff6a6a);
+  border:none; box-shadow:0 8px 18px rgba(229,57,53,.18);
+}
+.cp-hero__cta:hover{ filter:brightness(1.03); }
+.cp-hero__cta:active{ transform:translateY(1px); }
+
+.cp-hero__footnote{
+  margin-top:8px; color:#6b7280; font:600 12px "Poppins",system-ui,sans-serif;
 }
 
 /* responsive */
-@media (max-width: 1024px) {
-  .cp-hero__wrap { grid-template-columns: 1fr; }
-  .cp-hero__formCard { order: 2; }
-  .cp-hero__shell { order: 1; }
+@media (max-width:1024px){
+  .cp-hero__wrap{ grid-template-columns:1fr; }
+  .cp-hero__formCard{ order:2; }
+  .cp-hero__shell{ order:1; }
 }
-@media (max-width: 720px) {
-  .cp-hero__grid { grid-template-columns: 1fr; }
-}
-
-/* CTA buttons row */
-.cp-hero__ctaRow {
-  display: flex;
-  gap: 12px;
-  margin: 18px 0 10px;
-  flex-wrap: wrap;
+@media (max-width:720px){
+  .cp-hero__grid{ grid-template-columns:1fr; }
 }
 
-.cp-hero__ctaBtn {
-  height: 46px;
-  padding: 0 20px;
-  font: 700 15px "Poppins", system-ui, sans-serif;
-  border-radius: 12px;
-  transition: all 0.25s ease;
-}
-
-/* Primary red button */
-.cp-hero__ctaBtn--primary {
-  background: linear-gradient(90deg, #ff2b2b, #ff6a6a);
-  border: none;
-  color: #fff;
-  box-shadow: 0 10px 24px rgba(255, 60, 60, 0.2);
-}
-.cp-hero__ctaBtn--primary:hover {
-  filter: brightness(1.05);
-  transform: translateY(-2px);
-}
-
-/* Outline button */
-.cp-hero__ctaBtn--outline {
-  background: transparent;
-  border: 1.5px solid #ff4d4f;
-  color: #ff4d4f;
-}
-.cp-hero__ctaBtn--outline:hover {
-  background: #ff4d4f;
-  color: #fff;
-  transform: translateY(-2px);
-}
-
-
-/* Prevent layout shift + blur-up loading */
-.g-aspect {
-  position: relative;
-  aspect-ratio: 3 / 2;
-  border-radius: 12px;
-  overflow: hidden;
-  background: #f5f5f5;
-}
-
-.g-blur {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  filter: blur(18px);
-  transform: scale(1.08);
-  opacity: 1;
-  transition: opacity 250ms ease;
-}
-
-.g-aspect.is-loaded .g-blur {
-  opacity: 0;
-}
-
-.g-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  transition: opacity 250ms ease;
-  opacity: 1;
-}
-
-/* Dot and nav styling remains same, but ensure no heavy shadows */
-.g-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: none;
-  background: #d0d0d0;
-  transition: background 0.3s;
-}
-.g-dot.is-active {
-  background: #e53935;
-}
-.g-dots {
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-  gap: 6px;
-}
-
-/* Navigation buttons */
-.g-nav {
-  border: none;
-  background: rgba(255,255,255,0.9);
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s;
-}
-.g-nav:hover {
-  background: #e53935;
-  color: white;
-}
-
-/* Media layout responsiveness */
-@media (max-width: 768px) {
-  .p-row {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
+/* reduced motion = cheaper effects */
+@media (prefers-reduced-motion:reduce){
+  .cp-hero__glow{ animation:none; filter:none; opacity:.12; }
+  .cp-hero__shell, .cp-hero__formCard{ transition:none; }
 }

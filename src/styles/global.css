@@ -1,0 +1,8 @@
+/* Avoid offscreen cost and CLS */
+section, [data-virtual-section]{
+  content-visibility: auto;
+  contain-intrinsic-size: 1000px 800px; /* reserve space; tune per section */
+}
+
+/* Fonts render fast */
+html { font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
