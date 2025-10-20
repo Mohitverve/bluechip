@@ -1,4 +1,4 @@
-import React, { useMemo, useState, memo } from "react";
+import React, { useMemo, useState, memo, useEffect } from "react";
 import { Tabs, Button, Tag } from "antd";
 import { LeftOutlined, RightOutlined, CheckCircleTwoTone } from "@ant-design/icons";
 import "./../styles/product.css";
@@ -16,20 +16,17 @@ import pro1 from "../assets/proups1.webp";
 import pro2 from "../assets/proups2.jpg";
 import pro3 from "../assets/proups3.webp";
 
-/* Data */
+/* Product Data */
 const PRODUCTS = {
   pfc: {
     tab: "PFC SineWave Series",
     title: "PFC Sinewave UPS",
     subtitle: "Pure sinewave output for sensitive loads, workstations, and servers.",
     bullets: [
-     "True sinewave output ensures stable and safe operation for sensitive electronics",
-
-"Automatic Voltage Regulation (AVR) delivers consistent power during fluctuations",
-
-"Intuitive LCD panel provides real-time system status and load information",
-
-"Energy-efficient design minimizes power consumption and operating costs",
+      "True sinewave output ensures stable and safe operation for sensitive electronics",
+      "Automatic Voltage Regulation (AVR) delivers consistent power during fluctuations",
+      "Intuitive LCD panel provides real-time system status and load information",
+      "Energy-efficient design minimizes power consumption and operating costs",
     ],
     badges: ["Line-Interactive", "Rack / Tower", "Pure Sinewave"],
     images: [pfc1, pfc2, pfc3],
@@ -40,14 +37,9 @@ const PRODUCTS = {
     subtitle: "Redundant power path with seamless source switching.",
     bullets: [
       "Wide range of rackmount PDUs and ATS solutions, including metered, switched, and managed models",
-
-"Ideal for server racks, data centers, and mission-critical infrastructure",
-
-"Backed by expert technical support, fast Australia-wide delivery, and competitive pricing",
-
-"Designed for reliable, scalable, and efficient power distribution in IT environments",
-    
-    
+      "Ideal for server racks, data centers, and mission-critical infrastructure",
+      "Backed by expert technical support, fast Australia-wide delivery, and competitive pricing",
+      "Designed for reliable, scalable, and efficient power distribution in IT environments",
     ],
     badges: ["Redundant", "Rackmount", "Monitoring"],
     images: [du1, du2, du3],
@@ -57,28 +49,39 @@ const PRODUCTS = {
     title: "CyberPower Professional Series UPS",
     subtitle: "Enterprise-grade protection with scalable runtime.",
     bullets: [
-      
-    "Business-grade line-interactive UPS engineered for servers, networking, and telecom systems",
-
-"Features Automatic Voltage Regulation (AVR) to handle power fluctuations effectively",
-
-"Integrates GreenPower UPS™ technology for higher efficiency and longer battery life",
-
-"Offers LCD status display, data line protection, and advanced management software for full control",
-    
-    
+      "Business-grade line-interactive UPS engineered for servers, networking, and telecom systems",
+      "Features Automatic Voltage Regulation (AVR) to handle power fluctuations effectively",
+      "Integrates GreenPower UPS™ technology for higher efficiency and longer battery life",
+      "Offers LCD status display, data line protection, and advanced management software for full control",
     ],
     badges: ["Enterprise", "Scalable", "High Reliability"],
     images: [pro1, pro2, pro3],
   },
 };
 
-/* Minimal gallery */
+/* Optimized Gallery Component */
 const Gallery = memo(({ images }) => {
   const [i, setI] = useState(0);
   const total = images.length;
+  const [loaded, setLoaded] = useState(false);
+
   const next = () => setI((v) => (v + 1) % total);
   const prev = () => setI((v) => (v - 1 + total) % total);
+
+  useEffect(() => {
+    setLoaded(false);
+
+    // Preload next image in background
+    const nextIndex = (i + 1) % total;
+    const preload = new Image();
+    preload.src = images[nextIndex];
+  }, [i]);
+
+  // Preload first image eagerly
+  useEffect(() => {
+    const first = new Image();
+    first.src = images[0];
+  }, [images]);
 
   return (
     <div className="g-wrap">
@@ -87,31 +90,36 @@ const Gallery = memo(({ images }) => {
           <LeftOutlined />
         </button>
 
-        <img
-          key={i}
-          src={images[i]}
-          alt={`product ${i + 1}`}
-          className="g-img fade"
-          loading="lazy"
-          decoding="async"
-          width="640"
-          height="420"
-          sizes="(max-width: 1024px) 100vw, 560px"
-        />
+        <div className={`g-aspect ${loaded ? "is-loaded" : ""}`}>
+          <div
+            className="g-blur"
+            style={{ backgroundImage: `url(${images[i]})` }}
+          />
+          <img
+            key={i}
+            src={images[i]}
+            alt={`product ${i + 1}`}
+            className="g-img"
+            loading={i === 0 ? "eager" : "lazy"}
+            decoding="async"
+            fetchpriority={i === 0 ? "high" : "auto"}
+            width="640"
+            height="420"
+            onLoad={() => setLoaded(true)}
+          />
+        </div>
 
         <button className="g-nav g-right" aria-label="Next image" onClick={next}>
           <RightOutlined />
         </button>
       </div>
 
-      <div className="g-dots" role="tablist" aria-label="Image selector">
+      <div className="g-dots">
         {images.map((_, idx) => (
           <button
             key={idx}
             onClick={() => setI(idx)}
             className={`g-dot ${idx === i ? "is-active" : ""}`}
-            aria-label={`Show image ${idx + 1}`}
-            aria-selected={idx === i}
           />
         ))}
       </div>
@@ -119,15 +127,13 @@ const Gallery = memo(({ images }) => {
   );
 });
 
-/* Product block — image left, info right */
+/* Product Block */
 const ProductBlock = memo(({ p }) => (
   <div className="p-row">
-    {/* LEFT: images */}
     <div className="p-media">
       <Gallery images={p.images} />
     </div>
 
-    {/* RIGHT: info */}
     <div className="p-info">
       <h2 className="p-title">{p.title}</h2>
       <p className="p-sub">{p.subtitle}</p>
@@ -161,6 +167,7 @@ const ProductBlock = memo(({ p }) => (
   </div>
 ));
 
+/* Section */
 export default function ProductSection() {
   const [active, setActive] = useState("pfc");
 
@@ -179,8 +186,10 @@ export default function ProductSection() {
       <div className="container">
         <header className="head">
           <h1>CyberPower Product Lineup</h1>
-          <p>Explore our most popular CyberPower UPS and power distribution systems — designed for every business need, available through Bluechip IT.
-</p>
+          <p>
+            Explore our most popular CyberPower UPS and power distribution systems —
+            designed for every business need, available through Bluechip IT.
+          </p>
         </header>
 
         <Tabs
