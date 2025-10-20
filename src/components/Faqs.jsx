@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Tabs, Collapse, Input } from "antd";
+import React, { useMemo, useState } from "react";
+import { Tabs, Collapse, Input, Empty } from "antd";
 import {
   DollarOutlined,
   AppstoreOutlined,
@@ -10,7 +10,7 @@ import "../styles/faqs.css";
 
 const { Panel } = Collapse;
 
-// === EXACT questions & answers from your message ===
+// === EXACT questions & answers (unchanged) ===
 const DATA = {
   pricing: [
     {
@@ -53,6 +53,12 @@ export default function Faqs() {
   const [activeTab, setActiveTab] = useState("pricing");
   const [query, setQuery] = useState("");
 
+  // Flatten everything once
+  const ALL_ITEMS = useMemo(
+    () => [...DATA.pricing, ...DATA.stock, ...DATA.support],
+    []
+  );
+
   const filterItems = (arr) =>
     arr.filter(
       ({ q, a }) =>
@@ -61,8 +67,13 @@ export default function Faqs() {
     );
 
   const renderCollapse = (arr) => (
-    <Collapse accordion bordered={false} className="faq__collapse" expandIconPosition="end">
-      {filterItems(arr).map(({ key, q, a }) => (
+    <Collapse
+      accordion
+      bordered={false}
+      className="faq__collapse"
+      expandIconPosition="end"
+    >
+      {arr.map(({ key, q, a }) => (
         <Panel header={q} key={key}>
           <p className="faq__answer">{a}</p>
         </Panel>
@@ -78,7 +89,7 @@ export default function Faqs() {
           <DollarOutlined /> Pricing & Purchasing
         </span>
       ),
-      children: renderCollapse(DATA.pricing),
+      children: renderCollapse(filterItems(DATA.pricing)),
     },
     {
       key: "stock",
@@ -87,7 +98,7 @@ export default function Faqs() {
           <AppstoreOutlined /> Stock & Availability
         </span>
       ),
-      children: renderCollapse(DATA.stock),
+      children: renderCollapse(filterItems(DATA.stock)),
     },
     {
       key: "support",
@@ -96,9 +107,13 @@ export default function Faqs() {
           <SafetyCertificateOutlined /> Warranty & Support
         </span>
       ),
-      children: renderCollapse(DATA.support),
+      children: renderCollapse(filterItems(DATA.support)),
     },
   ];
+
+  // Global search block (independent of tabs)
+  const globalMatches = filterItems(ALL_ITEMS);
+  const showGlobal = query.trim().length > 0;
 
   return (
     <section className="faq">
@@ -114,7 +129,7 @@ export default function Faqs() {
             <Input
               size="large"
               prefix={<SearchOutlined />}
-              placeholder="Search questions…"
+              placeholder="Search all questions…"
               allowClear
               value={query}
               onChange={(e) => setQuery(e.target.value)}
@@ -122,12 +137,28 @@ export default function Faqs() {
           </div>
         </header>
 
+        {showGlobal && (
+          <div className="faq__results">
+            <div className="faq__results-head">
+              <strong>Search results</strong>
+              <span>{globalMatches.length} match{globalMatches.length === 1 ? "" : "es"}</span>
+            </div>
+            {globalMatches.length ? (
+              renderCollapse(globalMatches)
+            ) : (
+              <div className="faq__empty">
+                <Empty description="No matches found" />
+              </div>
+            )}
+          </div>
+        )}
+
         <Tabs
           items={tabItems}
           activeKey={activeTab}
           onChange={setActiveTab}
           className="faq__tabs"
-          destroyInactiveTabPane={false} // keeps all loaded
+          destroyInactiveTabPane={false}
         />
       </div>
     </section>
