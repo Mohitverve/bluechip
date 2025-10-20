@@ -91,7 +91,7 @@ export default function Advantages() {
     <section className="adv" aria-labelledby="adv-title" ref={rootRef}>
       <div className="adv__wrap">
         <header className="adv__head">
-          <span className="adv__kicker">CyberPower advantage</span>
+          
           <h2 id="adv-title">
            Key Competitive  <span>Advantages</span>.
           </h2>
