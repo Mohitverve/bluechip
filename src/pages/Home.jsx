@@ -5,6 +5,7 @@ import WhyChooseUs from '../components/WhyChooseUs'
 import WhyCyberPower from '../components/WhyCyberPower'
 import Advantages from '../components/Advantages'
 import Faqs from '../components/Faqs'
+import PartnerEnquiry from '../components/PartnerEnquiry'
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
       <WhyCyberPower/>
       <Advantages/>
       <Faqs/>
+    <PartnerEnquiry/>t
     </div>
   )
 }
