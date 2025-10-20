@@ -1,11 +1,10 @@
 import React, { useEffect, useRef } from "react";
-import { Card, Button, Row, Col } from "antd";
+import { Card, Row, Col } from "antd";
 import {
   TrophyOutlined,
   DollarOutlined,
   ThunderboltOutlined,
   SafetyCertificateOutlined,
-  TeamOutlined,
 } from "@ant-design/icons";
 import "../styles/why.css";
 
@@ -23,7 +22,7 @@ const features = [
   {
     icon: <ThunderboltOutlined />,
     title: "Australia-Wide Fast Local Delivery",
-    desc: "Regular container arrivals ensure CyberPower stock is ready for quick, reliable delivery across Australia..",
+    desc: "Regular container arrivals ensure CyberPower stock is ready for quick, reliable delivery across Australia.",
   },
   {
     icon: <SafetyCertificateOutlined />,
@@ -35,7 +34,6 @@ const features = [
 export default function WhyChooseUs() {
   const wrapRef = useRef(null);
 
-  // Reveal on scroll
   useEffect(() => {
     const io = new IntersectionObserver(
       (entries) =>
@@ -67,7 +65,6 @@ export default function WhyChooseUs() {
                 <h3 className="whyblue__title">{f.title}</h3>
                 <p className="whyblue__desc">{f.desc}</p>
 
-                {/* subtle divider + bottom affordance */}
                 <div className="whyblue__foot">
                   <span className="whyblue__dot" />
                   <span className="whyblue__dot" />
@@ -77,10 +74,6 @@ export default function WhyChooseUs() {
             </Col>
           ))}
         </Row>
-
-        <div className="whyblue__cta">
-         
-        </div>
       </div>
     </section>
   );

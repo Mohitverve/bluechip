@@ -4,16 +4,16 @@ import { LeftOutlined, RightOutlined, CheckCircleTwoTone } from "@ant-design/ico
 import "./../styles/product.css";
 
 /* Images */
-import pfc1 from "../assets/ups.jpg";
-import pfc2 from "../assets/ups2.png";
-import pfc3 from "../assets/ups3.png";
+import pfc1 from "../assets/ups1.webp";
+import pfc2 from "../assets/ups2.webp";
+import pfc3 from "../assets/ups3.webp";
 
-import du1 from "../assets/ats1.png";
-import du2 from "../assets/ats2.jpg";
-import du3 from "../assets/ats3.png";
+import du1 from "../assets/ats1.webp";
+import du2 from "../assets/ats2.webp";
+import du3 from "../assets/ats3.webp";
 
 import pro1 from "../assets/proups1.webp";
-import pro2 from "../assets/proups2.jpg";
+import pro2 from "../assets/proups2.webp";
 import pro3 from "../assets/proups3.webp";
 
 /* Product Data */

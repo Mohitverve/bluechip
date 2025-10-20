@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { BulbOutlined, ThunderboltOutlined, DeploymentUnitOutlined } from "@ant-design/icons";
 import "../styles/why-cyberpower.css";
-import YouTubeLite from "../components/YouTubeLite"; // <- add this import
+import YouTubeLite from "../components/YouTubeLite";
 
 export default function WhyCyberPower({ videoId = "nyRfVWiwiAs" }) {
   const rootRef = useRef(null);
@@ -52,14 +52,13 @@ export default function WhyCyberPower({ videoId = "nyRfVWiwiAs" }) {
           </ul>
         </article>
 
-        {/* Video tile with facade */}
         <aside className="wb__tile wb__video" aria-label="CyberPower overview video">
           <div className="wb__frame">
             <YouTubeLite
               videoId={videoId}
               title="CyberPower Overview"
-              autoLoadOnView={false}      // set to true if you prefer to auto-load on scroll
-              posterQuality="hqdefault"    // try 'maxresdefault' if your video has a 1080p thumbnail
+              autoLoadOnView={false}
+              posterQuality="hqdefault"
             />
           </div>
           <small className="wb__caption">

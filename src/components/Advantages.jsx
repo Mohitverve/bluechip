@@ -13,66 +13,38 @@ const items = [
   {
     icon: <TrophyOutlined />,
     title: "UPS Brand Worldwide",
-    desc:
-      "Cyberpower is Recognised by Frost & Sullivan for leadership in UPS innovation, quality, and sales performance.",
-    
+    desc: "Cyberpower is Recognised by Frost & Sullivan for leadership in UPS innovation, quality, and sales performance.",
   },
   {
     icon: <BuildOutlined />,
     title: "Original Manufacturer with Dedicated R&D",
-    desc:
-      "End-to-end design and production ensure consistent quality, reliability, and faster innovation cycle.",
-    bullets: [
-      "In-house firmware, batteries, & mechanics",
-      "Iterates quickly on partner feedback",
-    ],
+    desc: "End-to-end design and production ensure consistent quality, reliability, and faster innovation cycle.",
   },
   {
     icon: <ApiOutlined />,
     title: "Australian-Compliant Products",
-    desc:
-      "CyberPower systems are built to meet Australian standards, simplifying deployment and customer satisfaction.",
-    bullets: [
-      "Meets local safety & EMC standards",
-      "Documentation tailored for AU",
-    ],
+    desc: "CyberPower systems are built to meet Australian standards, simplifying deployment and customer satisfaction.",
   },
   {
     icon: <SafetyCertificateOutlined />,
     title: "Up to 3-year warranty",
-    desc:
-      "Extended local warranty and advanced replacement on select models — less downtime for your customers.",
-    bullets: [
-      "2-year advanced replacement options",
-      "Simple RMA workflow via distributor",
-    ],
+    desc: "Extended local warranty and advanced replacement on select models — less downtime for your customers.",
   },
   {
     icon: <DesktopOutlined />,
-    title: " Free Power Management Software",
-    desc:
-      "Integrated software suite for real-time monitoring, remote control, and energy management.",
-    bullets: [
-      "Multi-OS agents & SNMP support",
-      "APIs / logs for integrations",
-    ],
+    title: "Free Power Management Software",
+    desc: "Integrated software suite for real-time monitoring, remote control, and energy management.",
   },
   {
     icon: <ToolOutlined />,
     title: "Free Unlimited Technical Support",
-    desc:
-      "Access to Bluechip’s local CyberPower specialists for configuration, setup, and troubleshooting.",
-    bullets: [
-      "Sizing, topology & runtime advice",
-      "Fast escalation paths when needed",
-    ],
+    desc: "Access to Bluechip's local CyberPower specialists for configuration, setup, and troubleshooting.",
   },
 ];
 
 export default function Advantages() {
   const rootRef = useRef(null);
 
-  // simple reveal on scroll
   useEffect(() => {
     const io = new IntersectionObserver(
       (entries) =>
@@ -91,9 +63,8 @@ export default function Advantages() {
     <section className="adv" aria-labelledby="adv-title" ref={rootRef}>
       <div className="adv__wrap">
         <header className="adv__head">
-          
           <h2 id="adv-title">
-           Key Competitive  <span>Advantages</span>
+            Key Competitive <span>Advantages</span>
           </h2>
           <p>
             Why partners choose CyberPower — performance, reliability, and dedicated support that help resellers deliver more value to their customers.
@@ -111,8 +82,6 @@ export default function Advantages() {
               <div className="adv__icon">{it.icon}</div>
               <h3 className="adv__title">{it.title}</h3>
               <p className="adv__desc">{it.desc}</p>
-
-            
             </article>
           ))}
         </div>

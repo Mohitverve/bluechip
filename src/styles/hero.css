@@ -61,8 +61,25 @@
 }
 .cp-hero__shell.is-visible{ opacity:1; transform:none; }
 
-.cp-hero__logoRow{ display:flex; align-items:center; gap:12px; margin-bottom:10px; }
-.cp-hero__logo{ height:38px; width:auto; display:block; margin-bottom:16px; }
+.cp-hero__logoRow{ 
+  display:flex; 
+  align-items:center; 
+  gap:12px; 
+  margin-bottom:clamp(12px, 2vw, 20px); 
+}
+
+/* UPDATED: Larger logo with responsive sizing, maintains aspect ratio */
+.cp-hero__logo{ 
+  height:auto; 
+  width:clamp(200px, 20vw, 240px);
+  max-width:100%;
+  display:block;
+  /* Prevents CLS by reserving space */
+  aspect-ratio: 240 / 50;
+  /* Optimize rendering */
+  will-change:auto;
+  image-rendering:-webkit-optimize-contrast;
+}
 
 .cp-hero__title{
   margin:8px 0 10px;
@@ -167,9 +184,13 @@
   .cp-hero__wrap{ grid-template-columns:1fr; }
   .cp-hero__formCard{ order:2; }
   .cp-hero__shell{ order:1; }
+  /* Ensure logo stays readable on tablets */
+  .cp-hero__logo{ width:clamp(180px, 25vw, 220px); }
 }
 @media (max-width:720px){
   .cp-hero__grid{ grid-template-columns:1fr; }
+  /* Slightly smaller logo on mobile to prevent overwhelming */
+  .cp-hero__logo{ width:clamp(160px, 40vw, 200px); }
 }
 
 /* reduced motion = cheaper effects */

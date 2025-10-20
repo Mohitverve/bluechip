@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { Form, Input, Button } from "antd";
-import { App as AntApp } from "antd";
+import { Form, Input, Button, App as AntApp } from "antd";
 import "../styles/hero.css";
 
-// keep your logo; explicit size prevents CLS
-import logo from "../assets/cyberpro.png";
+import logo from "../assets/cyberpower.webp";
+import logoFallback from "../assets/cyberpro.png";
 
 export default function Hero() {
   const { message } = AntApp.useApp();
@@ -12,7 +11,6 @@ export default function Hero() {
   const [loading, setLoading] = useState(false);
   const rootRef = useRef(null);
 
-  // Reveal on scroll (cheap)
   useEffect(() => {
     const io = new IntersectionObserver(
       (entries) =>
@@ -33,7 +31,6 @@ export default function Hero() {
   const onFinish = async () => {
     try {
       setLoading(true);
-      // TODO: hook your backend here
       message.success({
         content: "Thanks — our team will reach out shortly.",
         duration: 2.2,
@@ -48,23 +45,25 @@ export default function Hero() {
 
   return (
     <section className="cp-hero" id="cyber-hero" ref={rootRef} data-virtual-section>
-      {/* subtle background accents */}
       <span className="cp-hero__glow cp-hero__glow--1" aria-hidden="true" />
       <span className="cp-hero__glow cp-hero__glow--2" aria-hidden="true" />
 
       <div className="cp-hero__wrap">
-        {/* LEFT: copy */}
         <div className="cp-hero__shell">
           <div className="cp-hero__logoRow">
-            <img
-              src={logo}
-              alt="CyberPower"
-              className="cp-hero__logo"
-              width="180"
-              height="38"
-              decoding="async"
-              fetchpriority="high"
-            />
+            <picture>
+              <source srcSet={logo} type="image/webp" />
+              <img
+                src={logoFallback}
+                alt="CyberPower"
+                className="cp-hero__logo"
+                width="180"
+                height="38"
+                loading="eager"
+                decoding="async"
+                fetchpriority="high"
+              />
+            </picture>
           </div>
 
           <h1 className="cp-hero__title">
@@ -79,7 +78,6 @@ export default function Hero() {
             <strong>Start your partnership with Bluechip IT today.</strong>
           </p>
 
-          {/* CTAs */}
           <div className="cp-hero__ctaRow">
             <Button
               type="primary"
@@ -102,7 +100,6 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* RIGHT: form — white card, red accents */}
         <div className="cp-hero__formCard">
           <header className="cp-hero__formHead">
             <h3>Become a Partner</h3>

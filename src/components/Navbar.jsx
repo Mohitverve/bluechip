@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Menu, Button, Drawer } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
-import logo from "../assets/bluechip.png";
+import logo from "../assets/bluechip.avif";
 import "../styles/navbar.css";
 
 const items = [
   {
     key: "home",
     label: "CyberPower Home",
-    
   },
   {
     key: "products",
@@ -35,22 +34,20 @@ export default function NavbarCyber() {
   return (
     <header className={`cpnav ${scrolled ? "cpnav--scrolled" : ""}`} role="banner">
       <nav className="cpnav__inner" aria-label="Primary">
-        {/* LEFT: Logo */}
         <a href="/" className="cpnav__brand" aria-label="Bluechip Home">
           <img src={logo} alt="Bluechip" className="cpnav__logo" width="128" height="36" />
         </a>
 
-        {/* RIGHT: Menu + CTA */}
         <div className="cpnav__right">
-         <Menu
-  className="cpnav__menu"
-  mode="horizontal"
-  selectable={false}
-  items={items}
-  triggerSubMenuAction="hover"
-  overflowedIndicator={null}
-  disabledOverflow  // ⬅️ keep items visible; never collapse to "..."
-/>
+          <Menu
+            className="cpnav__menu"
+            mode="horizontal"
+            selectable={false}
+            items={items}
+            triggerSubMenuAction="hover"
+            overflowedIndicator={null}
+            disabledOverflow
+          />
           <Button
             type="primary"
             shape="round"
@@ -62,7 +59,6 @@ export default function NavbarCyber() {
             Become a Partner
           </Button>
 
-          {/* Mobile hamburger */}
           <Button
             type="text"
             className="cpnav__hamburger"
@@ -73,7 +69,6 @@ export default function NavbarCyber() {
         </div>
       </nav>
 
-      {/* Mobile drawer */}
       <Drawer
         placement="right"
         open={open}
@@ -104,3 +99,4 @@ export default function NavbarCyber() {
     </header>
   );
 }
+
