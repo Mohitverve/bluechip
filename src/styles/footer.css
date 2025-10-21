@@ -1,0 +1,121 @@
+:root{
+  --ink:#0f172a;
+  --muted:#5b6472;
+  --line:#e8edf3;
+  --panel:#ffffff;
+  --red:#e53935;
+  --red-dark:#c62828;
+}
+
+/* Footer shell */
+.ft{
+  background:#fff;
+  border-top:1px solid var(--line);
+  padding:56px 16px 22px;
+  position:relative;
+  font-family:"Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--ink);
+}
+
+/* container grid */
+.ft__container{
+  max-width:1200px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns: 1.2fr repeat(3, .8fr) 1.3fr;
+  gap:28px;
+  align-items:start;
+}
+
+/* brand block */
+.ft__brand{padding-right:10px}
+.ft__logo{
+  display:inline-flex; align-items:center; gap:10px;
+  text-decoration:none;
+}
+.ft__logoMark{
+  width:36px; height:36px; border-radius:10px; display:grid; place-items:center;
+  background:blue;
+  color:#fff; font-weight:800; font-size:18px;
+  box-shadow:0 8px 20px rgba(229,57,53,.2);
+}
+.ft__logoText{
+  font-size:20px; font-weight:800; letter-spacing:.2px; color:var(--ink);
+}
+.ft__tagline{
+  margin:10px 0 14px; color:var(--muted); line-height:1.7; font-size:14.5px;
+}
+
+/* Social */
+.ft__social{ display:flex; gap:10px; margin-top:6px; }
+.ft__social a{
+  width:36px; height:36px; border-radius:999px; display:grid; place-items:center;
+  background:#f7f9fc; border:1px solid var(--line); transition:all .2s ease;
+}
+.ft__social a:hover{ transform: translateY(-2px); border-color:#ffd7d6; background:#fff0ef; }
+.ft__social svg{ width:18px; height:18px; fill:#1f2937; }
+
+/* columns */
+.ft__col h4{
+  margin:4px 0 10px; font-size:14px; font-weight:800; letter-spacing:.2px; color:#1c1f27;
+}
+.ft__col ul{ list-style:none; margin:0; padding:0; display:grid; gap:8px; }
+.ft__col a{
+  color:var(--muted); text-decoration:none; font-weight:600; font-size:14px;
+  transition:color .2s ease, transform .2s ease;
+}
+.ft__col a:hover{ color:var(--red); transform: translateX(1px); }
+
+/* newsletter */
+.ft__nlText{ color:var(--muted); margin:0 0 10px; font-size:14px; }
+.ft__form{ display:flex; gap:8px; }
+.ft__input{
+  flex:1; height:40px; border-radius:10px; border:1px solid var(--line);
+  padding:0 12px; font-size:14px; outline:none; transition:border-color .2s ease, box-shadow .2s ease;
+}
+.ft__input:focus{
+  border-color: var(--red);
+  box-shadow: 0 0 0 4px rgba(229,57,53,.1);
+}
+.ft__btn{
+  height:40px; padding:0 14px; border-radius:10px; border:none; cursor:pointer;
+  font-weight:800; font-size:14px; color:#fff;
+  background: linear-gradient(90deg, blue, #1d0f8b);
+  box-shadow: 0 10px 20px rgba(229,57,53,.22);
+  transition: filter .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.ft__btn:hover{ filter:brightness(1.04); transform: translateY(-1px); }
+.ft__btn:active{ transform: translateY(0); box-shadow:none; }
+
+/* divider & bottom */
+.ft__rule{ border:none; border-top:1px solid var(--line); margin:22px 0 12px; }
+.ft__bottom{
+  max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center;
+  gap:12px; flex-wrap:wrap; padding-inline:4px;
+}
+.ft__bottom p{ margin:0; color:#6b7280; font-size:13px; font-weight:600; }
+.ft__legal{ list-style:none; display:flex; gap:18px; margin:0; padding:0; }
+.ft__legal a{ color:#6b7280; text-decoration:none; font-weight:700; font-size:13px; }
+.ft__legal a:hover{ color:var(--red); }
+
+/* back to top */
+.ft__backTop{
+  position: fixed; right:18px; bottom:18px; width:40px; height:40px; border-radius:999px;
+  display:grid; place-items:center; text-decoration:none; color:#fff;
+  background:linear-gradient(90deg, var(--red), #ff6a6a);
+  box-shadow:0 10px 24px rgba(229,57,53,.25);
+  transition: transform .2s ease, filter .2s ease;
+}
+.ft__backTop:hover{ transform: translateY(-2px); filter:brightness(1.05); }
+
+/* Responsive */
+@media (max-width: 1024px){
+  .ft__container{ grid-template-columns: 1fr 1fr; }
+  .ft__nl{ grid-column: 1 / -1; }
+}
+@media (max-width: 640px){
+  .ft__container{ grid-template-columns: 1fr; }
+  .ft__brand{ margin-bottom:10px; }
+  .ft__form{ flex-direction:column; }
+  .ft__btn{ width:100%; }
+}
