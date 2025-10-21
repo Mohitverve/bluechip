@@ -1,3 +1,4 @@
+
 import React, { lazy, Suspense } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -9,9 +10,16 @@ const App = () => {
   return (
     <>
       <Navbar />
-      <Suspense fallback={<div style={{ minHeight: '100vh' }}>Loading...</div>}>
-        <Home />
-      </Suspense>
+      {/* FIXED: Added <main> landmark for accessibility */}
+      <main id="main-content">
+        <Suspense fallback={
+          <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div role="status" aria-live="polite">Loading...</div>
+          </div>
+        }>
+          <Home />
+        </Suspense>
+      </main>
       <Footer/>
     </>
   );

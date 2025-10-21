@@ -1,13 +1,15 @@
 /* =========================================
    CyberPower Hero — white theme + red accents
    Perf-minded: CLS-safe, low paint cost, content-visibility
+   FIXED: Improved color contrast for accessibility
 ========================================= */
 
 :root{
   --red-500:#e53935;
   --red-600:#c62828;
   --ink:#1c1e22;
-  --muted:#313842;
+  /* FIXED: Darker muted text for better contrast (was #313842) */
+  --muted:#1f2937;
   --line:#e9eef3;
   --panel:#ffffff;
 }
@@ -68,15 +70,12 @@
   margin-bottom:clamp(12px, 2vw, 20px); 
 }
 
-/* UPDATED: Larger logo with responsive sizing, maintains aspect ratio */
 .cp-hero__logo{ 
   height:auto; 
   width:clamp(200px, 20vw, 240px);
   max-width:100%;
   display:block;
-  /* Prevents CLS by reserving space */
   aspect-ratio: 240 / 50;
-  /* Optimize rendering */
   will-change:auto;
   image-rendering:-webkit-optimize-contrast;
 }
@@ -93,6 +92,7 @@
 }
 
 .cp-hero__sub{
+  /* FIXED: Better contrast for readability */
   color:var(--muted);
   font:500 clamp(14px,1.4vw,16.5px) "Poppins",system-ui,sans-serif;
   line-height:1.75;
@@ -119,15 +119,24 @@
 }
 .cp-hero__ctaBtn--primary:hover{ filter:brightness(1.05); transform:translateY(-2px); }
 
-/* outline */
+/* outline - FIXED: Better contrast */
 .cp-hero__ctaBtn--outline{
-  background:transparent; border:1.5px solid var(--red-500); color:var(--red-500);
+  background:transparent; 
+  border:1.5px solid var(--red-500); 
+  color:var(--red-600);
+  font-weight:700;
 }
-.cp-hero__ctaBtn--outline:hover{ background:var(--red-500); color:#fff; transform:translateY(-2px); }
+.cp-hero__ctaBtn--outline:hover{ 
+  background:var(--red-500); 
+  color:#fff; 
+  transform:translateY(-2px); 
+}
 
 .cp-hero__trust{
   display:inline-flex; align-items:center; gap:8px;
-  color:#14161a; font:600 12.5px "Poppins",system-ui,sans-serif;
+  /* FIXED: Better contrast */
+  color:#0f172a; 
+  font:600 12.5px "Poppins",system-ui,sans-serif;
 }
 .cp-hero__trust .dot{
   width:8px; height:8px; border-radius:999px; background:#27c93f;
@@ -150,14 +159,21 @@
 .cp-hero__formCard.is-visible{ transform:none; opacity:1; }
 .cp-hero__formCard:hover{ box-shadow:0 14px 34px rgba(15,23,42,.10); }
 
-.cp-hero__formHead h3{
-  margin:2px 0 2px; font:700 16px "Poppins",system-ui,sans-serif; color:var(--ink);
+.cp-hero__formHead h2{
+  margin:2px 0 2px; 
+  font:700 16px "Poppins",system-ui,sans-serif; 
+  color:var(--ink);
 }
-.cp-hero__formHead p{ margin:0 0 10px; color:#4b5563; font:500 13px "Poppins",system-ui,sans-serif; }
+.cp-hero__formHead p{ 
+  margin:0 0 10px; 
+  /* FIXED: Better contrast */
+  color:#374151; 
+  font:500 13px "Poppins",system-ui,sans-serif; 
+}
 
 /* antd labels */
 .cp-hero__form .ant-form-item-label > label{
-  font-weight:700; color:#20232b;
+  font-weight:700; color:#0f172a;
 }
 
 /* inputs grid */
@@ -176,7 +192,10 @@
 .cp-hero__cta:active{ transform:translateY(1px); }
 
 .cp-hero__footnote{
-  margin-top:8px; color:#6b7280; font:600 12px "Poppins",system-ui,sans-serif;
+  margin-top:8px; 
+  /* FIXED: Better contrast */
+  color:#4b5563; 
+  font:600 12px "Poppins",system-ui,sans-serif;
 }
 
 /* responsive */
@@ -184,12 +203,10 @@
   .cp-hero__wrap{ grid-template-columns:1fr; }
   .cp-hero__formCard{ order:2; }
   .cp-hero__shell{ order:1; }
-  /* Ensure logo stays readable on tablets */
   .cp-hero__logo{ width:clamp(180px, 25vw, 220px); }
 }
 @media (max-width:720px){
   .cp-hero__grid{ grid-template-columns:1fr; }
-  /* Slightly smaller logo on mobile to prevent overwhelming */
   .cp-hero__logo{ width:clamp(160px, 40vw, 200px); }
 }
 

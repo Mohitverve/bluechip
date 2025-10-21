@@ -59,8 +59,8 @@ const PRODUCTS = {
   },
 };
 
-/* Optimized Gallery Component */
-const Gallery = memo(({ images }) => {
+/* FIXED: Optimized Gallery Component with proper accessibility */
+const Gallery = memo(({ images, productName = "product" }) => {
   const [i, setI] = useState(0);
   const total = images.length;
   const [loaded, setLoaded] = useState(false);
@@ -75,7 +75,7 @@ const Gallery = memo(({ images }) => {
     const nextIndex = (i + 1) % total;
     const preload = new Image();
     preload.src = images[nextIndex];
-  }, [i]);
+  }, [i, total, images]);
 
   // Preload first image eagerly
   useEffect(() => {
@@ -84,42 +84,60 @@ const Gallery = memo(({ images }) => {
   }, [images]);
 
   return (
-    <div className="g-wrap">
+    <div className="g-wrap" role="region" aria-label={`${productName} image gallery`}>
       <div className="g-main">
-        <button className="g-nav g-left" aria-label="Previous image" onClick={prev}>
-          <LeftOutlined />
+        {/* FIXED: Added proper aria-label with context */}
+        <button 
+          className="g-nav g-left" 
+          aria-label={`Previous ${productName} image (${i + 1} of ${total})`}
+          onClick={prev}
+          type="button"
+        >
+          <LeftOutlined aria-hidden="true" />
         </button>
 
         <div className={`g-aspect ${loaded ? "is-loaded" : ""}`}>
           <div
             className="g-blur"
             style={{ backgroundImage: `url(${images[i]})` }}
+            aria-hidden="true"
           />
           <img
             key={i}
             src={images[i]}
-            alt={`product ${i + 1}`}
+            alt={`${productName} view ${i + 1} of ${total}`}
             className="g-img"
             loading={i === 0 ? "eager" : "lazy"}
             decoding="async"
-            fetchpriority={i === 0 ? "high" : "auto"}
+            fetchPriority={i === 0 ? "high" : "auto"}
             width="640"
             height="420"
             onLoad={() => setLoaded(true)}
           />
         </div>
 
-        <button className="g-nav g-right" aria-label="Next image" onClick={next}>
-          <RightOutlined />
+        {/* FIXED: Added proper aria-label with context */}
+        <button 
+          className="g-nav g-right" 
+          aria-label={`Next ${productName} image (${i + 1} of ${total})`}
+          onClick={next}
+          type="button"
+        >
+          <RightOutlined aria-hidden="true" />
         </button>
       </div>
 
-      <div className="g-dots">
+      {/* FIXED: Added accessible labels to dot navigation */}
+      <div className="g-dots" role="tablist" aria-label="Image selector">
         {images.map((_, idx) => (
           <button
             key={idx}
             onClick={() => setI(idx)}
             className={`g-dot ${idx === i ? "is-active" : ""}`}
+            role="tab"
+            aria-label={`View ${productName} image ${idx + 1}`}
+            aria-selected={idx === i}
+            type="button"
           />
         ))}
       </div>
@@ -127,39 +145,54 @@ const Gallery = memo(({ images }) => {
   );
 });
 
-/* Product Block */
+Gallery.displayName = "Gallery";
+
+/* FIXED: Product Block with proper heading hierarchy */
 const ProductBlock = memo(({ p }) => (
   <div className="p-row">
     <div className="p-media">
-      <Gallery images={p.images} />
+      <Gallery images={p.images} productName={p.title} />
     </div>
 
     <div className="p-info">
-      <h2 className="p-title">{p.title}</h2>
+      {/* FIXED: Changed from h2 to h3 since parent section has h1 */}
+      <h3 className="p-title">{p.title}</h3>
       <p className="p-sub">{p.subtitle}</p>
 
       <ul className="p-list">
         {p.bullets.map((b, i) => (
           <li key={i} style={{ animationDelay: `${80 * (i + 1)}ms` }}>
-            <CheckCircleTwoTone twoToneColor="#e53935" />
+            <CheckCircleTwoTone twoToneColor="#e53935" aria-hidden="true" />
             <span>{b}</span>
           </li>
         ))}
       </ul>
 
-      <div className="p-tags">
+      <div className="p-tags" role="list" aria-label="Product features">
         {p.badges.map((b, i) => (
-          <Tag key={i} className="tag-pill">
+          <Tag key={i} className="tag-pill" role="listitem">
             {b}
           </Tag>
         ))}
       </div>
 
       <div className="p-ctas">
-        <Button type="text" shape="round" className="btn-text">
+        <Button 
+          type="text" 
+          shape="round" 
+          className="btn-text"
+          aria-label={`View ${p.title} series details`}
+        >
           View Series
         </Button>
-        <Button type="primary" className="btn-primary">
+        <Button 
+          type="primary" 
+          className="btn-primary"
+          aria-label={`Request partner pricing for ${p.title}`}
+          onClick={() =>
+            window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })
+          }
+        >
           Partner Pricing
         </Button>
       </div>
@@ -167,7 +200,9 @@ const ProductBlock = memo(({ p }) => (
   </div>
 ));
 
-/* Section */
+ProductBlock.displayName = "ProductBlock";
+
+/* FIXED: Section with proper structure and ID for navigation */
 export default function ProductSection() {
   const [active, setActive] = useState("pfc");
 
@@ -182,10 +217,11 @@ export default function ProductSection() {
   );
 
   return (
-    <section className="section">
+    <section className="section" id="products-section" aria-labelledby="products-heading">
       <div className="container">
         <header className="head">
-          <h1>CyberPower Product Lineup</h1>
+          {/* FIXED: Added id for aria-labelledby */}
+          <h2 id="products-heading">CyberPower Product Lineup</h2>
           <p>
             Explore our most popular CyberPower UPS and power distribution systems —
             designed for every business need, available through Bluechip IT.
@@ -199,6 +235,7 @@ export default function ProductSection() {
           className="tabs"
           animated
           destroyInactiveTabPane
+          aria-label="Product categories"
         />
       </div>
     </section>

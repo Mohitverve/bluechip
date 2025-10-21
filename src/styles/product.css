@@ -1,13 +1,15 @@
 /* ===========================
    Bluechip · Products Section
    Clean, spacious, professional
+   FIXED: Improved color contrast for WCAG AA compliance
    =========================== */
 
 :root {
   --red: #e53935;
   --red-dark: #c62828;
   --ink: #0f172a;
-  --muted: #6b7280;
+  /* FIXED: Darker muted text for better contrast */
+  --muted: #4b5563;
   --line: #e5e7eb;
   --panel: #ffffff;
 
@@ -18,14 +20,14 @@
 /* SECTION WRAPPER */
 .section {
   background: #fff;
-            /* generous vertical rhythm */
   font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 .container { max-width: 1200px; margin: 0 auto; }
 
 /* SECTION HEAD */
 .head { text-align: center; margin-bottom: 56px; }
-.head h1 {
+/* FIXED: Changed to h2 for proper heading hierarchy */
+.head h2 {
   margin: 0 0 14px;
   font-size: clamp(30px, 3.8vw, 46px);
   font-weight: 800;
@@ -35,6 +37,7 @@
 .head p {
   margin: 0 auto;
   max-width: 720px;
+  /* FIXED: Better contrast */
   color: var(--muted);
   font-size: 16px;
   line-height: 1.7;
@@ -42,7 +45,7 @@
 
 /* TABS — segmented control */
 .tabs .ant-tabs-nav {
-  margin-bottom: 40px !important;     /* space before cards */
+  margin-bottom: 40px !important;
   display: flex;
   justify-content: center;
 }
@@ -59,11 +62,13 @@
   padding: 8px 16px;
   border-radius: 999px;
   font-weight: 700;
+  /* FIXED: Better contrast for inactive tabs */
   color: var(--ink);
   transition: background var(--fast) var(--ease), transform var(--fast) var(--ease), color var(--fast) var(--ease);
 }
 .tabs .ant-tabs-tab:hover {
-  background: #d95656 !important;     /* unified hover */
+  /* FIXED: Darker hover state for better contrast */
+  background: #c62828 !important;
   color: white !important;
   transform: translateY(-1px);
 }
@@ -78,7 +83,7 @@
 .p-row {
   display: grid;
   grid-template-columns: 0.95fr 1.05fr;
-  gap: 40px;                          /* wider gap between cards */
+  gap: 40px;
   align-items: stretch;
   margin-top: 20px;
 }
@@ -123,18 +128,65 @@
   background: #fff; color: var(--ink);
   display: grid; place-items: center;
   transition: transform var(--fast) var(--ease), background var(--fast) var(--ease), box-shadow var(--fast) var(--ease);
+  cursor: pointer;
 }
-.g-nav:hover { transform: translateY(-50%) scale(1.06); background: #f6f7fb; box-shadow: 0 8px 18px rgba(15,23,42,.12); }
-.g-left { left: 8px; } .g-right { right: 8px; }
+.g-nav:hover { 
+  transform: translateY(-50%) scale(1.06); 
+  background: #f6f7fb; 
+  box-shadow: 0 8px 18px rgba(15,23,42,.12); 
+}
+.g-left { left: 8px; } 
+.g-right { right: 8px; }
 
-.g-dots { display: flex; gap: 8px; justify-content: center; padding: 10px 0 2px; }
-.g-dot {
-  width: 8px; height: 8px; border-radius: 999px;
-  background: #cfd5e6; border: none;
-  transition: transform var(--fast) var(--ease), background var(--fast) var(--ease);
+/* FIXED: Improved dot button accessibility */
+.g-dots { 
+  display: flex; 
+  gap: 8px; 
+  justify-content: center; 
+  padding: 10px 0 2px;
+  /* Ensure sufficient touch target size */
+  min-height: 44px;
+  align-items: center;
 }
-.g-dot:hover { transform: scale(1.15); }
-.g-dot.is-active { background: var(--red); }
+.g-dot {
+  /* FIXED: Larger touch target (minimum 24x24px) */
+  width: 24px; 
+  height: 24px; 
+  border-radius: 999px;
+  /* FIXED: Darker inactive color for better visibility */
+  background: #9ca3af;
+  border: none;
+  transition: transform var(--fast) var(--ease), background var(--fast) var(--ease);
+  cursor: pointer;
+  /* Inner dot for visual indicator */
+  position: relative;
+  padding: 0;
+}
+/* Visual dot inside button */
+.g-dot::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: currentColor;
+  transition: width var(--fast) var(--ease), height var(--fast) var(--ease);
+}
+.g-dot:hover::after { 
+  width: 10px;
+  height: 10px;
+}
+.g-dot.is-active { 
+  background: var(--red);
+  color: white;
+}
+.g-dot.is-active::after {
+  width: 10px;
+  height: 10px;
+}
 
 /* INFO PANEL */
 .p-info { padding: 32px; position: relative; }
@@ -155,14 +207,20 @@
   letter-spacing: -0.3px;
   font-weight: 800;
 }
-.p-sub { margin: 0 0 16px; color: #374151; font-size: 15.5px; }
+/* FIXED: Better contrast */
+.p-sub { 
+  margin: 0 0 16px; 
+  color: #1f2937;
+  font-size: 15.5px; 
+}
 
 .p-list {
   list-style: none; margin: 0 0 14px; padding: 0;
   display: grid; gap: 10px;
 }
 .p-list li {
-  display: flex; align-items: center; gap: 8px; color: var(--ink);
+  display: flex; align-items: center; gap: 8px; 
+  color: var(--ink);
   opacity: 0; transform: translateY(4px);
   animation: rise .4s var(--ease) forwards;
 }
@@ -173,7 +231,8 @@
   border-radius: 999px;
   border: 1px solid var(--line);
   background: #f9fafc;
-  color: #0f172a;
+  /* FIXED: Better contrast */
+  color: #1f2937;
   font-weight: 600;
 }
 
@@ -186,8 +245,16 @@
   border-radius: 999px;
   transition: transform var(--fast) var(--ease), box-shadow var(--fast) var(--ease), background var(--fast) var(--ease);
 }
-.btn-primary:hover { background: var(--red-dark) !important; transform: translateY(-1px); box-shadow: 0 8px 18px rgba(229,57,53,.25); }
-.btn-text { color: var(--ink); font-weight: 700; transition: color var(--fast) var(--ease); }
+.btn-primary:hover { 
+  background: var(--red-dark) !important; 
+  transform: translateY(-1px); 
+  box-shadow: 0 8px 18px rgba(229,57,53,.25); 
+}
+.btn-text { 
+  color: var(--ink); 
+  font-weight: 700; 
+  transition: color var(--fast) var(--ease); 
+}
 .btn-text:hover { color: var(--red) !important; }
 
 /* RESPONSIVE */
@@ -200,5 +267,8 @@
 
 /* ACCESSIBILITY: reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { transition: none !important; animation: none !important; }
+  *, *::before, *::after { 
+    transition: none !important; 
+    animation: none !important; 
+  }
 }

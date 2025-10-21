@@ -121,3 +121,87 @@
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{ transition: none !important; animation: none !important; }
 }
+/* =========================================
+   Partner Enquiry Section - Accessibility Fixes
+   Add these overrides to your partner-enquiry.css
+========================================= */
+
+/* FIXED: Better contrast for all text elements */
+.pe__sub {
+  color: #4b5563; /* Improved from lighter gray */
+}
+
+.pe__foot {
+  color: #4b5563; /* Improved from lighter gray */
+}
+
+/* FIXED: Ensure form labels have sufficient contrast */
+.pe__form .ant-form-item-label > label {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+/* FIXED: Better contrast for placeholder text */
+.pe__form .ant-input::placeholder,
+.pe__form .ant-input-affix-wrapper .ant-input::placeholder,
+.pe__form .ant-select-selection-placeholder {
+  color: #6b7280;
+  opacity: 1;
+}
+
+/* FIXED: Tab styling for better contrast */
+.pe__tabs .ant-tabs-tab {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.pe__tabs .ant-tabs-tab:hover {
+  color: #e53935;
+}
+
+.pe__tabs .ant-tabs-tab-active {
+  color: #e53935;
+}
+
+/* FIXED: Better icon visibility */
+.pe__icon {
+  color: #6b7280;
+}
+
+/* FIXED: Character count has better contrast */
+.pe__form .ant-input-textarea-show-count::after {
+  color: #6b7280;
+}
+
+/* FIXED: Ensure sufficient touch targets for mobile */
+.pe__cta {
+  min-height: 44px;
+  padding: 0 24px;
+}
+
+/* FIXED: Focus states for keyboard navigation */
+.pe__form .ant-input:focus,
+.pe__form .ant-input-affix-wrapper:focus,
+.pe__form .ant-input-affix-wrapper-focused,
+.pe__form .ant-select-focused .ant-select-selector {
+  border-color: #e53935;
+  box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.1);
+  outline: none;
+}
+
+/* FIXED: Better visual feedback on button hover */
+.pe__cta:hover {
+  background-color: #c62828 !important;
+  border-color: #c62828 !important;
+}
+
+/* FIXED: Active state for buttons */
+.pe__cta:active {
+  transform: translateY(1px);
+}
+
+/* FIXED: Ensure error messages are visible */
+.pe__form .ant-form-item-explain-error {
+  color: #dc2626;
+  font-weight: 500;
+}
