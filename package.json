@@ -27,6 +27,7 @@
     "globals": "^16.4.0",
     "rollup-plugin-visualizer": "^6.0.5",
     "vite": "^7.1.7",
+    "vite-plugin-image-optimizer": "^2.0.2",
     "vite-plugin-imp": "^2.4.0"
   }
 }

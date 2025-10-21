@@ -62,6 +62,8 @@ export default function Hero() {
                 loading="eager"
                 decoding="async"
                 fetchpriority="high"
+                rel="preload" as="image"
+                type="image/webp"
               />
             </picture>
           </div>
