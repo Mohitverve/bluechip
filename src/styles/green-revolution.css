@@ -1,0 +1,122 @@
+.green-section {
+  background: linear-gradient(90deg, #e8f9f2 0%, #f3fbff 100%);
+  padding: 80px 20px;
+  font-family: "Poppins", system-ui, sans-serif;
+  color: #1a2b2e;
+  position: relative;
+  overflow: hidden;
+}
+
+.green-container {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.green-left h2 {
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 800;
+  color: #163e35;
+  margin-bottom: 16px;
+}
+
+.green-left h2 span {
+  color: #1b8b5e;
+  background: linear-gradient(90deg, #1b8b5e, #30c57b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.green-left .lead {
+  font-size: 16.5px;
+  line-height: 1.8;
+  color: #2f3e3a;
+  margin-bottom: 12px;
+}
+
+.green-left .desc {
+  color: #4e5e58;
+  font-size: 15.5px;
+  line-height: 1.75;
+  margin-bottom: 28px;
+  max-width: 550px;
+}
+
+.green-btn {
+  background: linear-gradient(90deg, #1b8b5e, #30c57b);
+  color: #fff;
+  border: none;
+  padding: 12px 26px;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(27, 139, 94, 0.25);
+}
+.green-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+/* Right cards */
+.green-right {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.green-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: #ffffff;
+  border: 1px solid #d9e7df;
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.green-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+}
+
+.green-card img {
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.green-card p {
+  margin: 0;
+  color: #2e3d38;
+  font-size: 15.5px;
+  line-height: 1.7;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .green-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .green-left .desc {
+    margin: 0 auto 28px;
+  }
+
+  .green-right {
+    align-items: center;
+  }
+
+  .green-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}

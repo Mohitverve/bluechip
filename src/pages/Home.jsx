@@ -8,6 +8,8 @@ const WhyCyberPower = lazy(() => import('../components/WhyCyberPower'));
 const Advantages = lazy(() => import('../components/Advantages'));
 const Faqs = lazy(() => import('../components/Faqs'));
 const PartnerEnquiry = lazy(() => import('../components/PartnerEnquiry'));
+const GreenRevolution = lazy(() => import('../components/GreenRevolution'));
+
 
 const Home = () => {
   return (
@@ -36,6 +38,10 @@ const Home = () => {
       
       <Suspense fallback={<div style={{ minHeight: '300px' }} />}>
         <PartnerEnquiry />
+      </Suspense>
+      
+      <Suspense fallback={<div style={{ minHeight: '300px' }} />}>
+      <GreenRevolution/>
       </Suspense>
     </div>
   );
